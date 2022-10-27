@@ -1,4 +1,5 @@
 #include "tile.h"
+#include <ctime>
 
 class Board
 {
