@@ -9,9 +9,7 @@ public class GemStorage extends Resource {
     }
 
     @Override
-    public String getName(boolean plural) {
-        return plural ? "Gems" : "Gem";
+    public String getName() {
+        return "Gem/s";
     }
-
-
 }

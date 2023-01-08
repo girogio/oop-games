@@ -9,7 +9,7 @@ public class ElixirStorage extends Resource {
     }
 
     @Override
-    public String getName(boolean plural) {
+    public String getName() {
         return "Elixir";
     }
 

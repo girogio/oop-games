@@ -9,7 +9,7 @@ public class GoldStorage extends Resource {
     }
 
     @Override
-    public String getName(boolean plural) {
+    public String getName() {
         return "Gold";
     }
 
