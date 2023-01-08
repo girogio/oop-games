@@ -1,16 +1,18 @@
 package mt.grigolo.players;
 
+import mt.grigolo.Globals;
 import mt.grigolo.buildings.Building;
 import mt.grigolo.resources.types.ElixirStorage;
 import mt.grigolo.resources.types.GemStorage;
 import mt.grigolo.resources.types.GoldStorage;
 import mt.grigolo.troops.Army;
-import mt.grigolo.utils.LevelSystem;
+import mt.grigolo.troops.Troop;
+import mt.grigolo.utils.LevelableObject;
 import mt.grigolo.utils.Position;
 
 import java.util.ArrayList;
 
-public class Village {
+public class Village extends LevelableObject {
 
     public final Position pos;
 
@@ -18,11 +20,11 @@ public class Village {
 
     private int healPerTick = 10;
 
-    private final GoldStorage goldStorage = new GoldStorage(100, 1000);
+    private final GoldStorage goldStorage;
 
-    private final GemStorage gemStorage = new GemStorage(100, 1000);
+    private final GemStorage gemStorage;
 
-    private final ElixirStorage elixirStorage = new ElixirStorage(100, 1000);
+    private final ElixirStorage elixirStorage;
 
     public GoldStorage getGoldStorage() {
         return goldStorage;
@@ -36,31 +38,34 @@ public class Village {
         return elixirStorage;
     }
 
-    public ArrayList<Building> getVillageBuildings() {
+    public ArrayList<Building> getBuildings() {
         return villageBuildings;
     }
 
     private final ArrayList<Building> villageBuildings = new ArrayList<>();
 
     private Army army;
-
-    public LevelSystem levelSystem;
+    private final ArrayList<Army> enemyArmies;
 
     public Village(int x, int y) {
-
+        super(5, 500, 300, null);
         this.pos = new Position(x, y);
         this.health = maxHealth;
         this.setArmy(new Army(this));
-        this.levelSystem = new LevelSystem(gemStorage, 5, 500, 300) {
-            @Override
-            public void levelUpLogic() {
-                maxHealth += 250;
-                health += 250;
-                army.maxTroops += 2;
-                healPerTick += 5;
-            }
-        };
+        this.goldStorage = new GoldStorage(Globals.initialVillageResourceAmount, 1000);
+        this.gemStorage = new GemStorage(Globals.initialVillageResourceAmount, 1000);
+        this.elixirStorage = new ElixirStorage(Globals.initialVillageResourceAmount, 1000);
+        super.setLevelUpResource(gemStorage);
+        enemyArmies = new ArrayList<>();
+    }
 
+
+    @Override
+    public void levelUpLogic() {
+        maxHealth += 250;
+        health += 250;
+        army.setMaxTroops(army.getMaxTroops() + 2);
+        healPerTick += 5;
     }
 
     public void doTick() {
@@ -90,7 +95,7 @@ public class Village {
     @Override
     public String toString() {
         String s = "";
-        s += "Lvl. " + levelSystem.getLevel() + " village at (" + pos.getX() + ", " + pos.getY() + ") with " + health + "/" + maxHealth + "hp\n";
+        s += "Lvl. " + getLevel() + " village at (" + pos.getX() + ", " + pos.getY() + ") with " + health + "/" + maxHealth + "hp\n";
         s += "Army:\n";
         s += army;
         s += "Resources:\n";
@@ -98,6 +103,18 @@ public class Village {
         s += "\t Gold: " + goldStorage.getAmount() + "/" + goldStorage.getMaxAmount() + "\n";
         s += "\t Gems: " + gemStorage.getAmount() + "/" + gemStorage.getMaxAmount() + "\n";
         return s;
+    }
+
+    public void giveToTroop(Troop troop, int amount) {
+        getGemStorage().giveToTroop(troop, amount);
+        getGoldStorage().giveToTroop(troop, amount);
+        getElixirStorage().giveToTroop(troop, amount);
+    }
+
+    public void takeFromTroop(Troop troop, int amount) {
+        getGemStorage().takeFromTroop(troop, amount);
+        getGoldStorage().takeFromTroop(troop, amount);
+        getElixirStorage().takeFromTroop(troop, amount);
     }
 
     public Army getArmy() {
@@ -108,5 +125,8 @@ public class Village {
         this.army = army;
     }
 
-    //floor of log3 base 4 is
+    public ArrayList<Army> getEnemyArmies() {
+        return enemyArmies;
+    }
+
 }
