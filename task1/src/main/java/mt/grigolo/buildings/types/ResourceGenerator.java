@@ -19,7 +19,7 @@ public class ResourceGenerator extends Building {
     }
 
     @Override
-    public void levelUpLogic() {
+    protected void levelUpLogic() {
         resGenPerTick += resGenIncrease;
         resGenIncrease *= resGenIncFactor;
     }

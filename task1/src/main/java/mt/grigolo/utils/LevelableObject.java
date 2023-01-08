@@ -41,7 +41,7 @@ public abstract class LevelableObject {
         return levelUpCost;
     }
 
-    public abstract void levelUpLogic();
+    protected abstract void levelUpLogic();
 
     public int getLevel() {
         return level;
