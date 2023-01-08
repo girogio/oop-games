@@ -27,8 +27,8 @@ public class PositionTest {
     }
 
     @Test
-    public void shortestPath() {
-        assertEquals(10, Position.shortestPath(positionA, positionB).size());
+    public void testDistance() {
+        assertEquals(10, Position.distance(positionA, positionB));
     }
 
     @Test
