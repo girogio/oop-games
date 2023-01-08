@@ -1,6 +1,6 @@
 package mt.grigolo.resources;
 
-import mt.grigolo.exceptions.NegativeResourceException;
+import mt.grigolo.exceptions.InsufficientResourceException;
 
 public abstract class Resource {
 
@@ -38,13 +38,13 @@ public abstract class Resource {
     }
 
 
-    public void transferTo(Resource resource, int amountToSend) throws NegativeResourceException {
+    public void transferTo(Resource resource, int amountToSend) throws InsufficientResourceException {
         if (this.getClass().equals(resource.getClass())) {
             if (this.amount >= amountToSend) {
                 this.amount -= amountToSend;
                 resource.amount += amountToSend;
             } else {
-                throw new NegativeResourceException();
+                throw new InsufficientResourceException();
             }
         }
     }

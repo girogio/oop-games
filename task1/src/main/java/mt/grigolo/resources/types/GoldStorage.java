@@ -4,12 +4,12 @@ import mt.grigolo.resources.Resource;
 
 public class GoldStorage extends Resource {
 
-    public GoldStorage(int amount, int maxAmount){
+    public GoldStorage(int amount, int maxAmount) {
         super(amount, maxAmount);
     }
 
     @Override
-    public String getName(boolean plural){
+    public String getName(boolean plural) {
         return "Gold";
     }
 

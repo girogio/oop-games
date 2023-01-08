@@ -1,6 +1,6 @@
 package mt.grigolo.resources;
 
-import mt.grigolo.exceptions.NegativeResourceException;
+import mt.grigolo.exceptions.InsufficientResourceException;
 import mt.grigolo.resources.types.ElixirStorage;
 import mt.grigolo.resources.types.GemStorage;
 import mt.grigolo.resources.types.GoldStorage;
@@ -132,7 +132,7 @@ public class ResourceTest {
             elixirStorage.transferTo(elixirStorage2, 50);
             assertEquals(50, elixirStorage2.getAmount());
             assertEquals(50, elixirStorage.getAmount());
-        } catch (NegativeResourceException e) {
+        } catch (InsufficientResourceException e) {
             e.printStackTrace();
         }
     }
@@ -163,19 +163,19 @@ public class ResourceTest {
 
         try {
             gemStorage.transferTo(gemStorage2, 200);
-        } catch (NegativeResourceException e) {
+        } catch (InsufficientResourceException e) {
             assertEquals(100, gemStorage.getAmount());
             assertEquals(0, gemStorage2.getAmount());
         }
         try {
             goldStorage.transferTo(goldStorage2, 200);
-        } catch (NegativeResourceException e) {
+        } catch (InsufficientResourceException e) {
             assertEquals(100, goldStorage.getAmount());
             assertEquals(0, goldStorage2.getAmount());
         }
         try {
             elixirStorage.transferTo(elixirStorage2, 200);
-        } catch (NegativeResourceException e) {
+        } catch (InsufficientResourceException e) {
             assertEquals(100, elixirStorage.getAmount());
             assertEquals(0, elixirStorage2.getAmount());
         }

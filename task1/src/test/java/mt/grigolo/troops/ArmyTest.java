@@ -1,9 +1,7 @@
 package mt.grigolo.troops;
 
-import mt.grigolo.exceptions.ArmyFullException;
 import mt.grigolo.exceptions.InsufficientResourceException;
 import mt.grigolo.exceptions.MaxLevelException;
-import mt.grigolo.exceptions.NegativeResourceException;
 import mt.grigolo.game.Village;
 import mt.grigolo.troops.types.Archer;
 import mt.grigolo.troops.types.Barbarian;
@@ -38,7 +36,7 @@ public class ArmyTest {
     }
 
     @Test
-    public void emptyInventory() throws NegativeResourceException, ArmyFullException, MaxLevelException, InsufficientResourceException {
+    public void emptyInventory() throws MaxLevelException, InsufficientResourceException {
 
         v.getGemStorage().increment(1000);
         v.levelSystem.levelUp();

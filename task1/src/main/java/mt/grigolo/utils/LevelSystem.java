@@ -34,6 +34,10 @@ public abstract class LevelSystem {
         }
     }
 
+    public int getLevelUpCost() {
+        return levelUpCost;
+    }
+
     public abstract void levelUpLogic();
 
     public int getLevel() {
