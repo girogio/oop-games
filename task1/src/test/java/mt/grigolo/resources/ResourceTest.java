@@ -91,22 +91,22 @@ public class ResourceTest {
     }
 
     @Test
-    public void testAdd(){
-        gemStorage.add(100);
+    public void testAdd() {
+        gemStorage.increment(100);
         assertEquals(200, gemStorage.getAmount());
-        elixirStorage.add(100);
+        elixirStorage.increment(100);
         assertEquals(200, elixirStorage.getAmount());
-        goldStorage.add(100);
+        goldStorage.increment(100);
         assertEquals(200, goldStorage.getAmount());
     }
 
     @Test
-    public void testRemove(){
-        gemStorage.remove(50);
+    public void testRemove() {
+        gemStorage.decrement(50);
         assertEquals(50, gemStorage.getAmount());
-        elixirStorage.remove(50);
+        elixirStorage.decrement(50);
         assertEquals(50, elixirStorage.getAmount());
-        goldStorage.remove(50);
+        goldStorage.decrement(50);
         assertEquals(50, goldStorage.getAmount());
     }
 

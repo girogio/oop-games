@@ -27,11 +27,11 @@ public abstract class Resource {
         this.maxAmount = maxAmount;
     }
 
-    public void add(int amount) {
+    public void increment(int amount) {
         this.amount += amount;
     }
 
-    public void remove(int amount) {
+    public void decrement(int amount) {
         this.amount -= amount;
     }
 
