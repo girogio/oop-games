@@ -1,5 +1,7 @@
 package mt.grigolo.resources;
 
+import mt.grigolo.exceptions.NegativeResourceException;
+
 public abstract class Resource {
 
     private int amount;
@@ -35,5 +37,24 @@ public abstract class Resource {
         this.amount -= amount;
     }
 
-    public abstract String getName(boolean plural) ;
+
+    public void transferTo(Resource resource, int amountToSend) throws NegativeResourceException {
+        if (this.getClass().equals(resource.getClass())) {
+            if (this.amount >= amountToSend) {
+                this.amount -= amountToSend;
+                resource.amount += amountToSend;
+            } else {
+                throw new NegativeResourceException();
+            }
+        }
+    }
+
+    public void transferTo(Resource resource) {
+        if (this.getClass().equals(resource.getClass())) {
+            resource.amount += this.amount;
+            this.amount = 0;
+        }
+    }
+
+    public abstract String getName(boolean plural);
 }
