@@ -1,5 +1,7 @@
 package mt.grigolo.troops;
 
+import mt.grigolo.resources.Resource;
+
 public abstract class Troop {
 
     private int health;
@@ -9,10 +11,6 @@ public abstract class Troop {
     private final int cost;
 
     private final int attack;
-
-    private final int maxCapacity;
-
-    private int capacity;
 
     private final int marchingSpeed;
 
@@ -32,17 +30,10 @@ public abstract class Troop {
     }
 
 
-    public int getMaxCapacity() {
-        return maxCapacity;
-    }
-
     public int getMarchingSpeed() {
         return marchingSpeed;
     }
 
-    public int getCurrentCapacity() {
-        return capacity;
-    }
 
     public int getMaxHealth() {
         return maxHealth;
@@ -52,28 +43,27 @@ public abstract class Troop {
         this.health = Math.min(health, maxHealth);
     }
 
-    public void setCapacity(int currentCapacity) {
-        this.capacity = currentCapacity;
-    }
+    private final Resource inventory;
 
-    public Troop(int cost, int attack, int maxCapacity, int marchingSpeed, int maxHealth) {
+    public Troop(int cost, int attack, Resource resourceType, int marchingSpeed, int maxHealth) {
         this.maxHealth = maxHealth;
         this.health = maxHealth;
         this.cost = cost;
+        this.inventory = resourceType;
         this.attack = attack;
-        this.maxCapacity = maxCapacity;
-        this.capacity = 0;
         this.marchingSpeed = marchingSpeed;
+    }
+
+    public Resource getInventory() {
+        return inventory;
     }
 
     @Override
     public String toString() {
-        String s = "";
-        s += "Cost: " + getCost() + "\n";
-        s += "Health: " + getHealth() + "/" + getMaxHealth();
-        s += "Attack: " + getAttack() + "\n";
-        s += "Capacity: " + getCurrentCapacity() + "/" + getMaxCapacity() + "\n";
-        s += "Speed: " + getMarchingSpeed();
+        String s = getClass().getSimpleName() + ": " + health + "/" + maxHealth + "hp, ";
+        s += "Attack: " + attack + ", ";
+        s += "Capacity: " + getInventory().getAmount() + "/" + getInventory().getMaxAmount() +  ", ";
+        s += "Speed: " + marchingSpeed + "";
         return s;
     }
 
