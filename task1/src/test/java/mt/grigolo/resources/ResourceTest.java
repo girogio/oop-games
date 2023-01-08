@@ -3,6 +3,8 @@ package mt.grigolo.resources;
 import mt.grigolo.resources.types.ElixirStorage;
 import mt.grigolo.resources.types.GemStorage;
 import mt.grigolo.resources.types.GoldStorage;
+import mt.grigolo.troops.Troop;
+import mt.grigolo.troops.types.Archer;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -25,24 +27,18 @@ public class ResourceTest {
     public void testGemStorage() {
         assertEquals(100, gemStorage.getAmount());
         assertEquals(1000, gemStorage.getMaxAmount());
-        assertEquals("Gem", gemStorage.getName(false));
-        assertEquals("Gems", gemStorage.getName(true));
     }
 
     @Test
     public void testElixirStorage() {
         assertEquals(100, elixirStorage.getAmount());
         assertEquals(1000, elixirStorage.getMaxAmount());
-        assertEquals("Elixir", elixirStorage.getName(false));
-        assertEquals("Elixir", elixirStorage.getName(true));
     }
 
     @Test
     public void testGoldStorage() {
         assertEquals(100, goldStorage.getAmount());
         assertEquals(1000, goldStorage.getMaxAmount());
-        assertEquals("Gold", goldStorage.getName(false));
-        assertEquals("Gold", goldStorage.getName(true));
     }
 
 
@@ -67,31 +63,20 @@ public class ResourceTest {
     }
 
     @Test
-    public void testGetName() {
-        assertEquals("Gem", gemStorage.getName(false));
-        assertEquals("Gems", gemStorage.getName(true));
-        assertEquals("Elixir", elixirStorage.getName(false));
-        assertEquals("Elixir", elixirStorage.getName(true));
-        assertEquals("Gold", goldStorage.getName(false));
-        assertEquals("Gold", goldStorage.getName(true));
-    }
-
-    @Test
     public void testResource() {
         Resource resource = new Resource(100, 1000) {
             @Override
-            public String getName(boolean plural) {
-                return plural ? "Resources" : "Resource";
+            public String getName() {
+                return "Test/s";
             }
         };
         assertEquals(100, resource.getAmount());
         assertEquals(1000, resource.getMaxAmount());
-        assertEquals("Resource", resource.getName(false));
-        assertEquals("Resources", resource.getName(true));
+        assertEquals("Test/s", resource.getName());
     }
 
     @Test
-    public void testAdd() {
+    public void testIncrement() {
         gemStorage.increment(100);
         assertEquals(200, gemStorage.getAmount());
         elixirStorage.increment(100);
@@ -101,13 +86,22 @@ public class ResourceTest {
     }
 
     @Test
-    public void testRemove() {
+    public void testDecrement() {
         gemStorage.decrement(50);
         assertEquals(50, gemStorage.getAmount());
         elixirStorage.decrement(50);
         assertEquals(50, elixirStorage.getAmount());
         goldStorage.decrement(50);
         assertEquals(50, goldStorage.getAmount());
+        goldStorage.decrement(100);
+        assertEquals(0, goldStorage.getAmount());
+    }
+
+    @Test
+    public void testGiveToTroop() {
+        Troop t = new Archer();
+        gemStorage.giveToTroop(t, 1);
+        assertEquals(1, t.getInventory().getAmount());
     }
 
 }

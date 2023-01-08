@@ -59,5 +59,5 @@ public abstract class Resource {
         }
     }
 
-    public abstract String getName(boolean plural);
+    public abstract String getName();
 }

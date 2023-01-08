@@ -10,7 +10,7 @@ import static org.junit.Assert.assertEquals;
 public class LevelableObjectTest {
     LevelableObject levelableObject = new LevelableObject(10, 10, 10, new Resource(1000, 1000) {
         @Override
-        public String getName(boolean plural) {
+        public String getName() {
             return "Test Currency";
         }
     }) {
@@ -42,7 +42,7 @@ public class LevelableObjectTest {
     public void levelUpInsufficientResource() throws MaxLevelException, InsufficientResourceException {
         levelableObject.setLevelUpResource(new Resource(0, 0) {
             @Override
-            public String getName(boolean plural) {
+            public String getName() {
                 return "Test Currency";
             }
         });
