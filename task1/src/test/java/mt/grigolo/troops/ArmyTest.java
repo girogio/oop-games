@@ -2,7 +2,7 @@ package mt.grigolo.troops;
 
 import mt.grigolo.exceptions.InsufficientResourceException;
 import mt.grigolo.exceptions.MaxLevelException;
-import mt.grigolo.game.Village;
+import mt.grigolo.players.Village;
 import mt.grigolo.troops.types.Archer;
 import mt.grigolo.troops.types.Barbarian;
 import mt.grigolo.troops.types.Goblin;

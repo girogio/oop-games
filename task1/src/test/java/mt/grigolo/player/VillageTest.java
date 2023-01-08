@@ -1,9 +1,10 @@
-package mt.grigolo.game;
+package mt.grigolo.player;
 
 import mt.grigolo.buildings.types.ResourceGenerator;
 import mt.grigolo.exceptions.ArmyFullException;
 import mt.grigolo.exceptions.InsufficientResourceException;
 import mt.grigolo.exceptions.MaxLevelException;
+import mt.grigolo.players.Village;
 import mt.grigolo.troops.types.Archer;
 import mt.grigolo.troops.types.Goblin;
 import org.junit.Before;

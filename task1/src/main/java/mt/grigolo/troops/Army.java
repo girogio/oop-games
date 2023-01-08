@@ -1,7 +1,7 @@
 package mt.grigolo.troops;
 
 import mt.grigolo.exceptions.ArmyFullException;
-import mt.grigolo.game.Village;
+import mt.grigolo.players.Village;
 import mt.grigolo.utils.Position;
 
 import java.util.ArrayList;

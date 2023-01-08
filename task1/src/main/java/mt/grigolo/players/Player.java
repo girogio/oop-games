@@ -1,7 +1,5 @@
 package mt.grigolo.players;
 
-import mt.grigolo.game.Village;
-
 public abstract class Player {
 
     Village village;
@@ -23,7 +21,6 @@ public abstract class Player {
 
     public void doTurn() {
 
-//        if(village.getArmy().ge)
         village.getArmy().emptyInventory();
 
         playerInput();

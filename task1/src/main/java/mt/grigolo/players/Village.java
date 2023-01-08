@@ -1,4 +1,4 @@
-package mt.grigolo.game;
+package mt.grigolo.players;
 
 import mt.grigolo.buildings.Building;
 import mt.grigolo.resources.types.ElixirStorage;
