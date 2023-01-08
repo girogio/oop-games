@@ -41,9 +41,9 @@ public class VillageTest {
 
     @Test
     public void doTick() {
-        villageA.getVillageBuildings().add(new ResourceGenerator(villageA.getGemStorage(), villageA.getGoldStorage()));
-        villageA.getVillageBuildings().add(new ResourceGenerator(villageA.getGoldStorage(), villageA.getGoldStorage()));
-        villageA.getVillageBuildings().add(new ResourceGenerator(villageA.getElixirStorage(), villageA.getGoldStorage()));
+        villageA.getBuildings().add(new ResourceGenerator(villageA.getGemStorage(), villageA.getGoldStorage()));
+        villageA.getBuildings().add(new ResourceGenerator(villageA.getGoldStorage(), villageA.getGoldStorage()));
+        villageA.getBuildings().add(new ResourceGenerator(villageA.getElixirStorage(), villageA.getGoldStorage()));
 
         villageA.doTick();
         assertEquals(110, villageA.getGoldStorage().getAmount());
@@ -53,18 +53,18 @@ public class VillageTest {
 
     @Test
     public void testLevelUp() {
-        assertEquals(1, villageA.levelSystem.getLevel());
+        assertEquals(1, villageA.getLevel());
         villageA.getGemStorage().increment(1000);
 
         try {
-            villageA.levelSystem.levelUp();
+            villageA.levelUp();
         } catch (InsufficientResourceException | MaxLevelException e) {
             fail();
         }
 
         assertEquals(1250, villageA.getHealth());
-        assertEquals(4, villageA.getArmy().maxTroops);
-        assertEquals(2, villageA.levelSystem.getLevel());
+        assertEquals(4, villageA.getArmy().getMaxTroops());
+        assertEquals(2, villageA.getLevel());
 
 
     }
