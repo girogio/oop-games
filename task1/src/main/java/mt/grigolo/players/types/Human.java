@@ -2,16 +2,17 @@ package mt.grigolo.players.types;
 
 import mt.grigolo.players.Player;
 
+import java.util.Scanner;
+
 public class Human extends Player {
 
 
-    public Human(int x, int y) {
-        super(x, y);
+    public Human(int x, int y, int id) {
+        super(x, y, id);
     }
 
     @Override
     public void playerInput() {
-        // TODO Auto-generated method stub
-
+        
     }
 }

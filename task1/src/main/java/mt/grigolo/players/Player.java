@@ -7,8 +7,11 @@ public abstract class Player {
 
     Village village;
 
-    public Player(int x, int y) {
+    private int id;
+
+    public Player(int x, int y, int id) {
         village = new Village(x, y);
+        this.id = id;
     }
 
     public boolean isAlive() {
