@@ -1,5 +1,6 @@
 package mt.grigolo.troops;
 
+import mt.grigolo.players.Village;
 import mt.grigolo.resources.Resource;
 
 public abstract class Troop {
@@ -62,10 +63,20 @@ public abstract class Troop {
     public String toString() {
         String s = getClass().getSimpleName() + ": " + health + "/" + maxHealth + "hp, ";
         s += "Attack: " + attack + ", ";
-        s += "Capacity: " + getInventory().getAmount() + "/" + getInventory().getMaxAmount() +  ", ";
+        s += "Capacity: " + getInventory().getAmount() + "/" + getInventory().getMaxAmount() + ", ";
         s += "Speed: " + marchingSpeed + "";
         return s;
     }
 
+    public void fight(Troop enemyTroop) {
+        enemyTroop.health -= this.attack;
+        this.health -= enemyTroop.attack;
+        this.health = Math.max(0, this.health);
+        enemyTroop.health = Math.max(0, enemyTroop.health);
+    }
+
+    public boolean isDead() {
+        return health <= 0;
+    }
 
 }
