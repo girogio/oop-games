@@ -29,6 +29,7 @@ public class TroopGeneratorTest {
 
     @Test
     public void interact() throws InsufficientResourceException {
+        troopGenerator.doTick();
         assertEquals(0, village.getArmy().size());
         troopGenerator.interact();
         troopGenerator.interact();
@@ -37,5 +38,12 @@ public class TroopGeneratorTest {
         troopGenerator.interact();
         troopGenerator.interact();
         assertEquals(2, village.getArmy().size());
+    }
+
+
+    @Test (expected = InsufficientResourceException.class)
+    public void interactInsufficientResource() throws InsufficientResourceException {
+        village.getGemStorage().setAmount(0);
+        troopGenerator.interact();
     }
 }
