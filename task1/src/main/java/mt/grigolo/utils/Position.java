@@ -19,7 +19,7 @@ public class Position {
         return y;
     }
 
-    public static ArrayList<Position> shortestPath(Position a, Position b) {
+    public static int distance(Position a, Position b) {
         ArrayList<Position> path = new ArrayList<>();
         int x = a.getX();
         int y = a.getY();
@@ -43,7 +43,7 @@ public class Position {
                 y += sy;
             }
         }
-        return path;
+        return path.size();
     }
 
     @Override
