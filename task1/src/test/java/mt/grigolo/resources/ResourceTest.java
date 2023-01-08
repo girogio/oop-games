@@ -1,6 +1,5 @@
 package mt.grigolo.resources;
 
-import mt.grigolo.exceptions.InsufficientResourceException;
 import mt.grigolo.resources.types.ElixirStorage;
 import mt.grigolo.resources.types.GemStorage;
 import mt.grigolo.resources.types.GoldStorage;
@@ -81,11 +80,6 @@ public class ResourceTest {
     public void testResource() {
         Resource resource = new Resource(100, 1000) {
             @Override
-            public void transferTo(Resource resource, int amount) {
-
-            }
-
-            @Override
             public String getName(boolean plural) {
                 return plural ? "Resources" : "Resource";
             }
@@ -114,71 +108,6 @@ public class ResourceTest {
         assertEquals(50, elixirStorage.getAmount());
         goldStorage.decrement(50);
         assertEquals(50, goldStorage.getAmount());
-    }
-
-    @Test
-    public void testTransfer() {
-        GemStorage gemStorage2 = new GemStorage(0, 1000);
-        GoldStorage goldStorage2 = new GoldStorage(0, 1000);
-        ElixirStorage elixirStorage2 = new ElixirStorage(0, 1000);
-
-        try {
-            gemStorage.transferTo(gemStorage2, 50);
-            assertEquals(50, gemStorage2.getAmount());
-            assertEquals(50, gemStorage.getAmount());
-            goldStorage.transferTo(goldStorage2, 50);
-            assertEquals(50, goldStorage2.getAmount());
-            assertEquals(50, goldStorage.getAmount());
-            elixirStorage.transferTo(elixirStorage2, 50);
-            assertEquals(50, elixirStorage2.getAmount());
-            assertEquals(50, elixirStorage.getAmount());
-        } catch (InsufficientResourceException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Test
-    public void fullTransfer() {
-        GemStorage gemStorage2 = new GemStorage(0, 1000);
-        GoldStorage goldStorage2 = new GoldStorage(0, 1000);
-        ElixirStorage elixirStorage2 = new ElixirStorage(0, 1000);
-
-        gemStorage.transferTo(gemStorage2);
-        assertEquals(100, gemStorage2.getAmount());
-        assertEquals(0, gemStorage.getAmount());
-        goldStorage.transferTo(goldStorage2);
-        assertEquals(100, goldStorage2.getAmount());
-        assertEquals(0, goldStorage.getAmount());
-        elixirStorage.transferTo(elixirStorage2);
-        assertEquals(100, elixirStorage2.getAmount());
-        assertEquals(0, elixirStorage.getAmount());
-
-    }
-
-    @Test
-    public void testTransferInsufficientResource(){
-        GemStorage gemStorage2 = new GemStorage(0, 1000);
-        GoldStorage goldStorage2 = new GoldStorage(0, 1000);
-        ElixirStorage elixirStorage2 = new ElixirStorage(0, 1000);
-
-        try {
-            gemStorage.transferTo(gemStorage2, 200);
-        } catch (InsufficientResourceException e) {
-            assertEquals(100, gemStorage.getAmount());
-            assertEquals(0, gemStorage2.getAmount());
-        }
-        try {
-            goldStorage.transferTo(goldStorage2, 200);
-        } catch (InsufficientResourceException e) {
-            assertEquals(100, goldStorage.getAmount());
-            assertEquals(0, goldStorage2.getAmount());
-        }
-        try {
-            elixirStorage.transferTo(elixirStorage2, 200);
-        } catch (InsufficientResourceException e) {
-            assertEquals(100, elixirStorage.getAmount());
-            assertEquals(0, elixirStorage2.getAmount());
-        }
     }
 
 }
