@@ -7,12 +7,13 @@ import mt.grigolo.troops.Army;
 public class Game {
 
     private final Map map;
+    private int round = 1;
 
     public Game(int playerCount, int aiCount, int w, int h) {
         this.map = new Map(w, h, playerCount, aiCount);
     }
 
-    public void startGame(){
+    public void startGame() {
         doRound();
     }
 
@@ -21,8 +22,12 @@ public class Game {
 
         for (Player player : map.getPlayers()) {
             if (player.isAlive()) {
-                if (player instanceof Human)
+                if (player instanceof Human) {
+                    System.out.print("\033[H\033[2J");
+                    System.out.flush();
+                    System.out.println("Round " + round + ", player " + player.getId() + "'s turn.\nMap: \n");
                     System.out.println(map);
+                }
                 player.doTurn();
             } else {
                 map.getPlayers().remove(player);
@@ -39,7 +44,7 @@ public class Game {
                 army.march();
             }
         }
-
+        round++;
         doRound();
     }
 }
