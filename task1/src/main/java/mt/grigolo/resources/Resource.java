@@ -13,6 +13,9 @@ public abstract class Resource {
         this.maxAmount = maxAmount;
     }
 
+    public Resource() {
+    }
+
     public int getAmount() {
         return amount;
     }

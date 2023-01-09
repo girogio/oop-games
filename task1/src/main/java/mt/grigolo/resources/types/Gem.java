@@ -8,4 +8,7 @@ public class Gem extends Resource {
         super(amount, maxAmount);
     }
 
+    public Gem() {
+    }
+
 }

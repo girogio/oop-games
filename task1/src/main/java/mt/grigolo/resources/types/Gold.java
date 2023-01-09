@@ -8,6 +8,10 @@ public class Gold extends Resource {
         super(amount, maxAmount);
     }
 
+    public Gold() {
+
+    }
+
 }
 
 
