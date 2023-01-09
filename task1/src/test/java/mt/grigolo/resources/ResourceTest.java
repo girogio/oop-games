@@ -2,7 +2,7 @@ package mt.grigolo.resources;
 
 import mt.grigolo.resources.types.Elixir;
 import mt.grigolo.resources.types.Gem;
-import mt.grigolo.resources.types.GoldStorage;
+import mt.grigolo.resources.types.Gold;
 import mt.grigolo.troops.Troop;
 import mt.grigolo.troops.types.Archer;
 import org.junit.Before;
@@ -20,7 +20,7 @@ public class ResourceTest {
     public void setUp() {
         gemStorage = new Gem(100, 1000);
         elixirStorage = new Elixir(100, 1000);
-        goldStorage = new GoldStorage(100, 1000);
+        goldStorage = new Gold(100, 1000);
     }
 
     @Test
