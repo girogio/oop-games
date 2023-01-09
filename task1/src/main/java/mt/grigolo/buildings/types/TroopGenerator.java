@@ -52,5 +52,10 @@ public class TroopGenerator extends Building {
         }
     }
 
+    @Override
+    public String toString() {
+        return ("Lvl. " + getLevel() + troopGenerated.getClass().getSimpleName() + " Generator (" + (int) Math.ceil((discount) * 100) + "% discount)");
+    }
+
 
 }

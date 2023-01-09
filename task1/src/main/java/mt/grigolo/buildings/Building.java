@@ -22,4 +22,6 @@ public abstract class Building extends LevelableObject {
 
     protected abstract void interact() throws InsufficientResourceException;
 
+    public abstract String toString();
+
 }
