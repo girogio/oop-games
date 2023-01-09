@@ -8,11 +8,6 @@ public class Gold extends Resource {
         super(amount, maxAmount);
     }
 
-    @Override
-    public String getName() {
-        return "Gold";
-    }
-
 }
 
 

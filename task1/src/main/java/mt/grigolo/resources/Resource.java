@@ -30,7 +30,7 @@ public abstract class Resource {
     }
 
     public void increment(int amount) {
-        if(this.amount + amount > maxAmount) {
+        if (this.amount + amount > maxAmount) {
             this.amount = maxAmount;
         } else {
             this.amount += amount;
@@ -38,7 +38,7 @@ public abstract class Resource {
     }
 
     public void decrement(int amount) {
-        if(this.amount - amount < 0) {
+        if (this.amount - amount < 0) {
             this.amount = 0;
         } else {
             this.amount -= amount;
@@ -58,6 +58,4 @@ public abstract class Resource {
             troop.getInventory().decrement(amountToTake);
         }
     }
-
-    public abstract String getName();
 }

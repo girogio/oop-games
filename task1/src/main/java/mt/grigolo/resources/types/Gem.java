@@ -8,8 +8,4 @@ public class Gem extends Resource {
         super(amount, maxAmount);
     }
 
-    @Override
-    public String getName() {
-        return "Gem/s";
-    }
 }
