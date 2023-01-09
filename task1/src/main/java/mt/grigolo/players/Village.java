@@ -18,9 +18,9 @@ public class Village extends LevelableObject {
 
     public final Position pos;
 
-    private int health, maxHealth = 1000;
+    private int health, maxHealth;
 
-    private int healPerTick = 10;
+    private int healPerTick;
 
     private final Gold gold;
 
@@ -51,16 +51,17 @@ public class Village extends LevelableObject {
 
     public Village(int x, int y) {
         super(5, 500, 300, null);
-        this.pos = new Position(x, y);
-        this.health = maxHealth;
-        this.setArmy(new Army(this));
-        this.gold = new Gold(Globals.initialVillageResourceAmount, 1000);
-        this.gem = new Gem(Globals.initialVillageResourceAmount, 1000);
-        this.elixir = new Elixir(Globals.initialVillageResourceAmount, 1000);
+        this.gold = new Gold(Globals.initialVillageResourceAmount, Globals.initialMaxResourceAmount);
+        this.gem = new Gem(Globals.initialVillageResourceAmount, Globals.initialMaxResourceAmount);
+        this.elixir = new Elixir(Globals.initialVillageResourceAmount, Globals.initialMaxResourceAmount);
         super.setLevelUpResource(gem);
+        this.pos = new Position(x, y);
+        this.maxHealth = Globals.initialVillageHealth;
+        this.health = maxHealth;
+        this.army = new Army(this);
         enemyArmies = new ArrayList<>();
+        healPerTick = Globals.initialHealPerTick;
     }
-
 
     @Override
     public void levelUpLogic() {
