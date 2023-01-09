@@ -2,6 +2,7 @@ package mt.grigolo.players;
 
 import mt.grigolo.Globals;
 import mt.grigolo.buildings.Building;
+import mt.grigolo.exceptions.InsufficientResourceException;
 import mt.grigolo.resources.types.ElixirStorage;
 import mt.grigolo.resources.types.GemStorage;
 import mt.grigolo.resources.types.GoldStorage;
@@ -116,6 +117,17 @@ public class Village extends LevelableObject {
         getGoldStorage().takeFromTroop(troop, amount);
         getElixirStorage().takeFromTroop(troop, amount);
     }
+
+
+    public void buyBuilding(Building building) throws InsufficientResourceException {
+        if (building.getBuildCost() <= building.getLevelUpResource().getAmount()) {
+            building.getLevelUpResource().decrement(building.getBuildCost());
+            getBuildings().add(building);
+        } else {
+            throw new InsufficientResourceException(building.getBuildCost() - building.getLevelUpResource().getAmount());
+        }
+    }
+
 
     public Army getArmy() {
         return army;
