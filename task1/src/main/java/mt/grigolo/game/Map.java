@@ -40,7 +40,14 @@ public class Map {
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
+        //print top border
+        s.append("  ");
+        for (int i = 0; i < width; i++) {
+            s.append(" ").append(i).append(" ");
+        }
+        s.append("\n");
         for (int i = 0; i < height; i++) {
+            s.append(i).append(" ");
             for (int j = 0; j < width; j++) {
                 boolean found = false;
                 for (Player player : players) {
