@@ -35,9 +35,9 @@ public class ResourceGenerator extends Building {
 
     @Override
     public String toString() {
-        return "Lvl. " + getLevel() + "/" + getMaxLevel() +
+        return "Lvl. " + getLevel() + "/" + getMaxLevel() + " " +
                 resourceGenerated.getClass().getSimpleName() + " Generator" +
-                " (" + resGenPerTick + " " + resourceGenerated.getClass().getSimpleName() + "/turn)";
+                " (" + resGenPerTick + " " + resourceGenerated.getClass().getSimpleName() + "s/turn)";
     }
 
 }
