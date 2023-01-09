@@ -1,5 +1,6 @@
 package mt.grigolo.troops;
 
+import mt.grigolo.Globals;
 import mt.grigolo.exceptions.ArmyFullException;
 import mt.grigolo.players.Village;
 import mt.grigolo.utils.Position;
@@ -23,12 +24,9 @@ public class Army extends ArrayList<Troop> {
         } else throw new ArmyFullException();
     }
 
-
     private final Village sourceVillage;
 
     private Village destination;
-
-    Position currentPos;
 
     public int getTicksUntilArrival() {
         return ticksUntilArrival;
@@ -39,21 +37,21 @@ public class Army extends ArrayList<Troop> {
     }
 
     public void march() {
-        if (destination != null && ticksUntilArrival > 0) ticksUntilArrival--;
+        if (ticksUntilArrival > 0) ticksUntilArrival--;
     }
 
     public Army(Village sourceVillage) {
         this.sourceVillage = sourceVillage;
+        this.destination = this.sourceVillage;
         ticksUntilArrival = 0;
-        currentPos = sourceVillage.pos;
-        setMaxTroops(2);
+        setMaxTroops(Globals.initialMaxTroops);
     }
 
     public void emptyInventory() {
         for (Troop troop : this) {
             sourceVillage.takeFromTroop(troop, troop.getInventory().getAmount());
         }
-        destination = null;
+        destination = sourceVillage;
     }
 
     public Village getDestination() {
@@ -129,6 +127,11 @@ public class Army extends ArrayList<Troop> {
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder("\t Capacity: " + size() + "/" + this.getMaxTroops() + "\n");
+        if (destination != sourceVillage) {
+            s.append("\t Destination: ").append(destination.pos).append(" (").append(ticksUntilArrival).append(" ticks until arrival)\n");
+        } else {
+            s.append("\t Destination: ").append(destination.pos).append(" (").append("in home village").append(")\n");
+        }
         for (Troop troop : this) {
             s.append("\t ").append(troop.toString()).append("\n");
         }
@@ -145,7 +148,7 @@ public class Army extends ArrayList<Troop> {
     }
 
     public boolean isInHomeVillage() {
-        return destination == null && isInRange(sourceVillage);
+        return isInRange(sourceVillage);
     }
 
     public int getMaxTroops() {
