@@ -97,6 +97,10 @@ public class Village extends LevelableObject {
     public String toString() {
         String s = "";
         s += "Lvl. " + getLevel() + " village at (" + pos.getX() + ", " + pos.getY() + ") with " + health + "/" + maxHealth + "hp\n";
+        s += "Buildings:\n";
+        for (Building b : getBuildings()) {
+            s += "\t " + b + "\n";
+        }
         s += "Army:\n";
         s += army;
         s += "Resources:\n";
