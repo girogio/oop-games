@@ -2,6 +2,8 @@ package mt.grigolo.buildings.types;
 
 import mt.grigolo.Globals;
 import mt.grigolo.buildings.Building;
+import mt.grigolo.exceptions.ArmyAwayException;
+import mt.grigolo.exceptions.ArmyFullException;
 import mt.grigolo.exceptions.InsufficientResourceException;
 import mt.grigolo.resources.Resource;
 import mt.grigolo.troops.Army;
@@ -19,11 +21,11 @@ public class TroopGenerator extends Building {
 
     private final int baseCost;
 
-    public TroopGenerator(Troop troopGenerated, Army targetArmy, Resource resourceConsumed, int baseCost) {
+    public TroopGenerator(Troop troopGenerated, Army targetArmy, Resource resourceConsumed) {
         super(resourceConsumed, 10, 30, 50, 50);
         this.troopGenerated = troopGenerated;
         this.targetArmy = targetArmy;
-        this.baseCost = baseCost;
+        this.baseCost = troopGenerated.getCost();
         this.resourceConsumed = resourceConsumed;
     }
 
@@ -42,20 +44,25 @@ public class TroopGenerator extends Building {
     }
 
     @Override
-    protected void interact() throws InsufficientResourceException {
-        int cost = (int) (baseCost * (1 - discount));
-        if (resourceConsumed.getAmount() < cost) {
-            throw new InsufficientResourceException(cost - resourceConsumed.getAmount());
+    public void interact() throws InsufficientResourceException, ArmyFullException, ArmyAwayException {
+        if (targetArmy.isInHomeVillage()) {
+            int cost = (int) (baseCost * (1 - discount));
+            if (resourceConsumed.getAmount() < cost) {
+                throw new InsufficientResourceException(cost - resourceConsumed.getAmount());
+            } else {
+                if (!targetArmy.add(troopGenerated))
+                    throw new ArmyFullException();
+                resourceConsumed.decrement(cost);
+            }
         } else {
-            resourceConsumed.decrement(cost);
-            targetArmy.add(troopGenerated);
+            throw new ArmyAwayException();
         }
     }
 
     @Override
     public String toString() {
-        return ("Lvl. " + getLevel() + troopGenerated.getClass().getSimpleName() + " Generator (" + (int) Math.ceil((discount) * 100) + "% discount)");
+        return ("Lvl. " + getLevel() + "/" + getMaxLevel() + " " + troopGenerated.getClass().getSimpleName() +
+                " Training Hut (" + (int) Math.ceil((discount) * 100) + "% discount)");
     }
-
 
 }
