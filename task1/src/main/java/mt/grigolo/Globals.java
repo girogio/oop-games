@@ -14,4 +14,6 @@ public class Globals {
     public static final int resGenDefaultGenIncrease = 10;
     public static final double resGenIncFactor = 1.2;
 
+    public static final int initialMaxTroops = 2;
+
 }
