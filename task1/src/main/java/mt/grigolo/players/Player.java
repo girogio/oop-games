@@ -1,7 +1,14 @@
 package mt.grigolo.players;
 
 import mt.grigolo.buildings.Building;
+import mt.grigolo.buildings.types.ResourceGenerator;
+import mt.grigolo.buildings.types.TroopGenerator;
+import mt.grigolo.resources.Resource;
 import mt.grigolo.troops.Army;
+import mt.grigolo.troops.Troop;
+import mt.grigolo.troops.types.Archer;
+import mt.grigolo.troops.types.Barbarian;
+import mt.grigolo.troops.types.Goblin;
 
 public abstract class Player {
 
@@ -28,7 +35,7 @@ public abstract class Player {
     public void doTurn() {
 
         // Friendly troop arrival
-        if (village.getArmy().isInHomeVillage()){
+        if (village.getArmy().isInHomeVillage()) {
             village.getArmy().emptyInventory();
         }
 
@@ -43,12 +50,51 @@ public abstract class Player {
         }
 
         // Resource gathering
-        for (Building buildings: village.getBuildings()) {
+        for (Building buildings : village.getBuildings()) {
             buildings.doTick();
         }
 
         // Player input
         playerInput();
+
+    }
+
+    public boolean build(int building, int type) {
+        Building b = null;
+
+        switch (building) {
+
+            case 1 -> {
+                switch (type) {
+                    case 1 -> b = new ResourceGenerator(village.getGemStorage(), village.getGoldStorage());
+                    case 2 -> b = new ResourceGenerator(village.getGoldStorage(), village.getElixirStorage());
+                    case 3 -> b = new ResourceGenerator(village.getElixirStorage(), village.getGemStorage());
+                }
+            }
+            case 2 -> {
+                Troop t = null;
+                Resource r = null;
+                switch (type) {
+                    case 1 -> {
+                        t = new Archer();
+                        r = getVillage().getGemStorage();
+                    }
+                    case 2 -> {
+                        t = new Goblin();
+                        r = getVillage().getGoldStorage();
+                    }
+                    case 3 -> {
+                        t = new Barbarian();
+                        r = getVillage().getElixirStorage();
+                    }
+                }
+                b = new TroopGenerator(t, village.getArmy(), r, 2);
+            }
+        }
+
+        village.getBuildings().add(b);
+        return true;
+
 
     }
 
