@@ -61,15 +61,18 @@ public abstract class Player {
     }
 
     public boolean build(int building, int type) throws InsufficientResourceException {
+
         Building b = null;
 
         switch (building) {
-
             case 1 -> {
                 switch (type) {
                     case 1 -> b = new ResourceGenerator(village.getGemStorage(), village.getGoldStorage());
                     case 2 -> b = new ResourceGenerator(village.getGoldStorage(), village.getElixirStorage());
                     case 3 -> b = new ResourceGenerator(village.getElixirStorage(), village.getGemStorage());
+                    case 4 -> {
+                        return false;
+                    }
                 }
             }
 
@@ -89,8 +92,12 @@ public abstract class Player {
                         t = new Barbarian();
                         r = getVillage().getElixirStorage();
                     }
+                    case 4 -> {
+                        return true;
+                    }
                 }
-                b = new TroopGenerator(t, village.getArmy(), r, 2);
+                assert t != null;
+                b = new TroopGenerator(t, village.getArmy(), r);
             }
         }
 
@@ -99,8 +106,12 @@ public abstract class Player {
             village.buyBuilding(b);
             return true;
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             return false;
         }
     }
 
+    public String getId() {
+        return String.valueOf(id);
+    }
 }
