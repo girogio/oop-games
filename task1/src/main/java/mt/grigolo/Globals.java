@@ -14,6 +14,10 @@ public class Globals {
     public static final int resGenDefaultGenIncrease = 10;
     public static final double resGenIncFactor = 1.2;
 
+    // Village
+    public static final int initialVillageHealth = 1000;
     public static final int initialMaxTroops = 2;
+    public static final int initialMaxResourceAmount = 1000;
+    public static final int initialHealPerTick= 20;
 
 }
