@@ -2,9 +2,9 @@ package mt.grigolo.resources.types;
 
 import mt.grigolo.resources.Resource;
 
-public class ElixirStorage extends Resource {
+public class Elixir extends Resource {
 
-    public ElixirStorage(int amount, int maxAmount) {
+    public Elixir(int amount, int maxAmount) {
         super(amount, maxAmount);
     }
 

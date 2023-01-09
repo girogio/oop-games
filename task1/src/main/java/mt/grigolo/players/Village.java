@@ -3,7 +3,7 @@ package mt.grigolo.players;
 import mt.grigolo.Globals;
 import mt.grigolo.buildings.Building;
 import mt.grigolo.exceptions.InsufficientResourceException;
-import mt.grigolo.resources.types.ElixirStorage;
+import mt.grigolo.resources.types.Elixir;
 import mt.grigolo.resources.types.GemStorage;
 import mt.grigolo.resources.types.GoldStorage;
 import mt.grigolo.troops.Army;
@@ -25,7 +25,7 @@ public class Village extends LevelableObject {
 
     private final GemStorage gemStorage;
 
-    private final ElixirStorage elixirStorage;
+    private final Elixir elixir;
 
     public GoldStorage getGoldStorage() {
         return goldStorage;
@@ -35,8 +35,8 @@ public class Village extends LevelableObject {
         return gemStorage;
     }
 
-    public ElixirStorage getElixirStorage() {
-        return elixirStorage;
+    public Elixir getElixirStorage() {
+        return elixir;
     }
 
     public ArrayList<Building> getBuildings() {
@@ -55,7 +55,7 @@ public class Village extends LevelableObject {
         this.setArmy(new Army(this));
         this.goldStorage = new GoldStorage(Globals.initialVillageResourceAmount, 1000);
         this.gemStorage = new GemStorage(Globals.initialVillageResourceAmount, 1000);
-        this.elixirStorage = new ElixirStorage(Globals.initialVillageResourceAmount, 1000);
+        this.elixir = new Elixir(Globals.initialVillageResourceAmount, 1000);
         super.setLevelUpResource(gemStorage);
         enemyArmies = new ArrayList<>();
     }
@@ -104,7 +104,7 @@ public class Village extends LevelableObject {
         s += "Army:\n";
         s += army;
         s += "Resources:\n";
-        s += "\t Elixir: " + elixirStorage.getAmount() + "/" + elixirStorage.getMaxAmount() + "\n";
+        s += "\t Elixir: " + elixir.getAmount() + "/" + elixir.getMaxAmount() + "\n";
         s += "\t Gold: " + goldStorage.getAmount() + "/" + goldStorage.getMaxAmount() + "\n";
         s += "\t Gems: " + gemStorage.getAmount() + "/" + gemStorage.getMaxAmount() + "\n";
         return s;
