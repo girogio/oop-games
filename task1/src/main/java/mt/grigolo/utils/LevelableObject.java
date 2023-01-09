@@ -3,6 +3,7 @@ package mt.grigolo.utils;
 import mt.grigolo.exceptions.InsufficientResourceException;
 import mt.grigolo.exceptions.MaxLevelException;
 import mt.grigolo.resources.Resource;
+import mt.grigolo.resources.types.Gem;
 
 public abstract class LevelableObject {
 
@@ -27,7 +28,7 @@ public abstract class LevelableObject {
         if (level > maxLevel) {
             throw new MaxLevelException();
         } else if (levelUpResource.getAmount() < levelUpCost) {
-            throw new InsufficientResourceException(levelUpCost -  levelUpResource.getAmount());
+            throw new InsufficientResourceException(levelUpCost - levelUpResource.getAmount());
         } else {
             level++;
             this.levelUpResource.decrement(levelUpCost);
@@ -41,13 +42,20 @@ public abstract class LevelableObject {
         return levelUpCost;
     }
 
+    public String getLevelUpString() {
+        if (levelUpResource instanceof Gem)
+            return levelUpCost + " " + levelUpResource.getClass().getSimpleName() + "s";
+        else
+            return levelUpCost + " " + levelUpResource.getClass().getSimpleName();
+    }
+
     protected abstract void levelUpLogic();
 
     public int getLevel() {
         return level;
     }
 
-    public int getMaxLevel(){
+    public int getMaxLevel() {
         return maxLevel;
     }
 
@@ -55,9 +63,8 @@ public abstract class LevelableObject {
         return levelUpResource;
     }
 
-    public void setLevelUpResource(Resource levelUpResource) {
+    public  void setLevelUpResource(Resource levelUpResource) {
         this.levelUpResource = levelUpResource;
     }
-
 
 }
