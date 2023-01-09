@@ -1,6 +1,7 @@
 package mt.grigolo.game;
 
 import mt.grigolo.players.Player;
+import mt.grigolo.players.types.Human;
 import mt.grigolo.troops.Army;
 
 public class Game {
@@ -17,10 +18,11 @@ public class Game {
 
     public void doRound() {
 
-        System.out.println(map);
 
         for (Player player : map.getPlayers()) {
             if (player.isAlive()) {
+                if (player instanceof Human)
+                    System.out.println(map);
                 player.doTurn();
             } else {
                 map.getPlayers().remove(player);

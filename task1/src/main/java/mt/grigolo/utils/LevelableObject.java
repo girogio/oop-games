@@ -27,7 +27,7 @@ public abstract class LevelableObject {
         if (level > maxLevel) {
             throw new MaxLevelException();
         } else if (levelUpResource.getAmount() < levelUpCost) {
-            throw new InsufficientResourceException();
+            throw new InsufficientResourceException(levelUpCost -  levelUpResource.getAmount());
         } else {
             level++;
             this.levelUpResource.decrement(levelUpCost);
@@ -45,6 +45,14 @@ public abstract class LevelableObject {
 
     public int getLevel() {
         return level;
+    }
+
+    public int getMaxLevel(){
+        return maxLevel;
+    }
+
+    public Resource getLevelUpResource() {
+        return levelUpResource;
     }
 
     public void setLevelUpResource(Resource levelUpResource) {

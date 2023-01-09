@@ -1,7 +1,6 @@
 package mt.grigolo.buildings.types;
 
 import mt.grigolo.buildings.Building;
-import mt.grigolo.players.Player;
 import mt.grigolo.resources.Resource;
 
 public class ResourceGenerator extends Building {

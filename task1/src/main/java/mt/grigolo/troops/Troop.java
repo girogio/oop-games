@@ -1,6 +1,5 @@
 package mt.grigolo.troops;
 
-import mt.grigolo.players.Village;
 import mt.grigolo.resources.Resource;
 
 public abstract class Troop {

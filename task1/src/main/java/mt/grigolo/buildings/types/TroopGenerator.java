@@ -45,7 +45,7 @@ public class TroopGenerator extends Building {
     protected void interact() throws InsufficientResourceException {
         int cost = (int) (baseCost * (1 - discount));
         if (resourceConsumed.getAmount() < cost) {
-            throw new InsufficientResourceException();
+            throw new InsufficientResourceException(cost - resourceConsumed.getAmount());
         } else {
             resourceConsumed.decrement(cost);
             targetArmy.add(troopGenerated);

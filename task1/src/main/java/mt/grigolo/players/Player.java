@@ -3,6 +3,7 @@ package mt.grigolo.players;
 import mt.grigolo.buildings.Building;
 import mt.grigolo.buildings.types.ResourceGenerator;
 import mt.grigolo.buildings.types.TroopGenerator;
+import mt.grigolo.exceptions.InsufficientResourceException;
 import mt.grigolo.resources.Resource;
 import mt.grigolo.troops.Army;
 import mt.grigolo.troops.Troop;
@@ -14,7 +15,7 @@ public abstract class Player {
 
     Village village;
 
-    private int id;
+    private final int id;
 
     public Player(int x, int y, int id) {
         village = new Village(x, y);
@@ -59,7 +60,7 @@ public abstract class Player {
 
     }
 
-    public boolean build(int building, int type) {
+    public boolean build(int building, int type) throws InsufficientResourceException {
         Building b = null;
 
         switch (building) {
@@ -71,6 +72,7 @@ public abstract class Player {
                     case 3 -> b = new ResourceGenerator(village.getElixirStorage(), village.getGemStorage());
                 }
             }
+
             case 2 -> {
                 Troop t = null;
                 Resource r = null;
@@ -92,10 +94,13 @@ public abstract class Player {
             }
         }
 
-        village.getBuildings().add(b);
-        return true;
-
-
+        try {
+            assert b != null;
+            village.buyBuilding(b);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
 }
