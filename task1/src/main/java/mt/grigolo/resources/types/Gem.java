@@ -2,9 +2,9 @@ package mt.grigolo.resources.types;
 
 import mt.grigolo.resources.Resource;
 
-public class GemStorage extends Resource {
+public class Gem extends Resource {
 
-    public GemStorage(int amount, int maxAmount) {
+    public Gem(int amount, int maxAmount) {
         super(amount, maxAmount);
     }
 
