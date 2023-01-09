@@ -14,7 +14,7 @@ public class ResourceGenerator extends Building {
 
 
     public ResourceGenerator(Resource resourceGenerated, Resource resourceConsumed) {
-        super(resourceConsumed, 50, 50, 50);
+        super(resourceConsumed, 10, 30, 50, 50);
         this.resourceGenerated = resourceGenerated;
     }
 

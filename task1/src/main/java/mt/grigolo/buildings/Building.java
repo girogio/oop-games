@@ -7,9 +7,15 @@ import mt.grigolo.utils.LevelableObject;
 
 public abstract class Building extends LevelableObject {
 
+    private final int buildCost;
 
-    public Building(Resource levelUpResource, int maxLevel, int levelUpCost, int costIncrease) {
+    public Building(Resource levelUpResource, int maxLevel, int levelUpCost, int costIncrease, int cost) {
         super(maxLevel, levelUpCost, costIncrease, levelUpResource);
+        this.buildCost = cost;
+    }
+
+    public int getBuildCost() {
+        return buildCost;
     }
 
     public abstract void doTick();

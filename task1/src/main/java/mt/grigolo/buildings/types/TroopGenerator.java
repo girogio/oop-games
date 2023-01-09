@@ -20,7 +20,7 @@ public class TroopGenerator extends Building {
     private final int baseCost;
 
     public TroopGenerator(Troop troopGenerated, Army targetArmy, Resource resourceConsumed, int baseCost) {
-        super(resourceConsumed, 10, 50, 50);
+        super(resourceConsumed, 10, 30, 50, 50);
         this.troopGenerated = troopGenerated;
         this.targetArmy = targetArmy;
         this.baseCost = baseCost;
