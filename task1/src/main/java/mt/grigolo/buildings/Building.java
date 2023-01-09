@@ -9,9 +9,9 @@ public abstract class Building extends LevelableObject {
 
     private final int buildCost;
 
-    public Building(Resource levelUpResource, int maxLevel, int levelUpCost, int costIncrease, int cost) {
+    public Building(Resource levelUpResource, int maxLevel, int levelUpCost, int costIncrease, int buildCost) {
         super(maxLevel, levelUpCost, costIncrease, levelUpResource);
-        this.buildCost = cost;
+        this.buildCost = buildCost;
     }
 
     public int getBuildCost() {
