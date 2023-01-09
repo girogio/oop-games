@@ -2,15 +2,17 @@ package mt.grigolo.game;
 
 import mt.grigolo.players.Player;
 import mt.grigolo.players.types.Human;
-import mt.grigolo.troops.Army;
+import mt.grigolo.utils.Input;
 
 public class Game {
 
     private final Map map;
-    private int round = 1;
+
+    private int round;
 
     public Game(int playerCount, int aiCount, int w, int h) {
         this.map = new Map(w, h, playerCount, aiCount);
+        this.round = 1;
     }
 
     public void startGame() {
@@ -19,13 +21,12 @@ public class Game {
 
     public void doRound() {
 
-
         for (Player player : map.getPlayers()) {
             if (player.isAlive()) {
                 if (player instanceof Human) {
-                    System.out.print("\033[H\033[2J");
-                    System.out.flush();
-                    System.out.println("Round " + round + ", player " + player.getId() + "'s turn.\nMap: \n");
+                    Input.clearScreen();
+                    System.out.println("Round " + round + ", player " + player.getId() + "'s turn.");
+                    System.out.println("Map: ");
                     System.out.println(map);
                 }
                 player.doTurn();
@@ -33,17 +34,17 @@ public class Game {
                 map.getPlayers().remove(player);
             }
         }
-
+        // Win condition
         if (map.getPlayers().size() == 1) {
-            System.out.println("Player " + map.getPlayers().get(0).getClass().getSimpleName() + " won!");
+            System.out.println("Player " + map.getPlayers().get(0).getId() + " won!");
             return;
         }
 
+        // March phase
         for (Player player : map.getPlayers()) {
-            for (Army army : player.getVillage().getEnemyArmies()) {
-                army.march();
-            }
+            player.getVillage().getArmy().march();
         }
+
         round++;
         doRound();
     }
