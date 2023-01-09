@@ -11,7 +11,8 @@ public class Map {
     private final int width;
     private final int height;
 
-    private final ArrayList<Player> players = new ArrayList<>();
+    public static final ArrayList<Player> players = new ArrayList<>();
+
 
     public Map(int width, int height, int playerCount, int aiCount) {
         this.width = width;
