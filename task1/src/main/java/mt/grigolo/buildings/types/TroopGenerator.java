@@ -9,7 +9,7 @@ import mt.grigolo.resources.Resource;
 import mt.grigolo.troops.Army;
 import mt.grigolo.troops.Troop;
 
-public class TroopGenerator extends Building {
+public abstract class TroopGenerator extends Building {
 
     private final Army targetArmy;
 
@@ -50,7 +50,7 @@ public class TroopGenerator extends Building {
             if (resourceConsumed.getAmount() < cost) {
                 throw new InsufficientResourceException(cost - resourceConsumed.getAmount());
             } else {
-                if (!targetArmy.add(troopGenerated))
+                if (!targetArmy.add(generatedTroop()))
                     throw new ArmyFullException();
                 resourceConsumed.decrement(cost);
             }
@@ -58,6 +58,8 @@ public class TroopGenerator extends Building {
             throw new ArmyAwayException();
         }
     }
+
+    abstract Troop generatedTroop();
 
     @Override
     public String toString() {
