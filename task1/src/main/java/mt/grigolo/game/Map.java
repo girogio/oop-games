@@ -10,13 +10,15 @@ public class Map {
 
     private final int width;
     private final int height;
+    public int round;
 
     public static final ArrayList<Player> players = new ArrayList<>();
 
 
-    public Map(int width, int height, int playerCount, int aiCount) {
+    public Map(int width, int height, int playerCount, int aiCount, int round) {
         this.width = width;
         this.height = height;
+        this.round = round;
 
         int x, y;
 
@@ -36,6 +38,12 @@ public class Map {
             players.add(new AI(x, y, playerCount + i + 1));
         }
 
+        for (Player player : players) {
+            if (player instanceof Human) {
+                ((Human) player).setMap(this);
+            }
+        }
+
     }
 
     @Override
@@ -52,7 +60,7 @@ public class Map {
             for (int j = 0; j < width; j++) {
                 boolean found = false;
                 for (Player player : players) {
-                    if (player.getVillage().pos.getX() == j && player.getVillage().pos.getY() == i) {
+                    if (player.getVillage().pos.getX() == j && player.getVillage().pos.getY() == i && player.isAlive()) {
                         if (player instanceof Human) {
                             s.append(" H ");
                         } else if (player instanceof AI) {
