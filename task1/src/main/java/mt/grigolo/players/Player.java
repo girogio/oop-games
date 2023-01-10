@@ -1,10 +1,12 @@
 package mt.grigolo.players;
 
 import mt.grigolo.buildings.Building;
-import mt.grigolo.buildings.types.ArcherGenerator;
-import mt.grigolo.buildings.types.BarbarianGenerator;
-import mt.grigolo.buildings.types.GoblinGenerator;
-import mt.grigolo.buildings.types.ResourceGenerator;
+import mt.grigolo.buildings.resources.types.ElixirGenerator;
+import mt.grigolo.buildings.resources.types.GemGenerator;
+import mt.grigolo.buildings.resources.types.GoldGenerator;
+import mt.grigolo.buildings.troops.types.ArcherGenerator;
+import mt.grigolo.buildings.troops.types.BarbarianGenerator;
+import mt.grigolo.buildings.troops.types.GoblinGenerator;
 import mt.grigolo.exceptions.InsufficientResourceException;
 
 public abstract class Player {
@@ -63,9 +65,9 @@ public abstract class Player {
         switch (building) {
             case 1 -> {
                 switch (type) {
-                    case 1 -> b = new ResourceGenerator(village.getGemStorage(), village.getGoldStorage());
-                    case 2 -> b = new ResourceGenerator(village.getGoldStorage(), village.getElixirStorage());
-                    case 3 -> b = new ResourceGenerator(village.getElixirStorage(), village.getGemStorage());
+                    case 1 -> b = new GemGenerator(getVillage());
+                    case 2 -> b = new GoldGenerator(getVillage());
+                    case 3 -> b = new ElixirGenerator(getVillage());
                     default -> {
                         return;
                     }
@@ -82,6 +84,7 @@ public abstract class Player {
                     }
                 }
             }
+
             default -> {
                 return;
             }
@@ -98,4 +101,5 @@ public abstract class Player {
     public String getId() {
         return String.valueOf(id);
     }
+
 }
