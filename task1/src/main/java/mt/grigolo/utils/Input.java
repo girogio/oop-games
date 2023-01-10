@@ -30,12 +30,17 @@ public class Input {
         return s.nextLine();
     }
 
-    public void closeScanner() {
+    public static void closeScanner() {
         s.close();
     }
 
     public static void clearScreen() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
+    }
+
+    public static void pause(){
+        System.out.println("\nPress enter to continue...");
+        s.nextLine();
     }
 }
