@@ -1,6 +1,6 @@
 package mt.grigolo.buildings.troops;
 
-import mt.grigolo.Globals;
+import mt.grigolo.utils.Globals;
 import mt.grigolo.buildings.Building;
 import mt.grigolo.exceptions.ArmyAwayException;
 import mt.grigolo.exceptions.ArmyFullException;

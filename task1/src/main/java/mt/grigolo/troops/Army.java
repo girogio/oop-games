@@ -1,6 +1,6 @@
 package mt.grigolo.troops;
 
-import mt.grigolo.Globals;
+import mt.grigolo.utils.Globals;
 import mt.grigolo.exceptions.ArmyBusyException;
 import mt.grigolo.exceptions.ArmyEmptyException;
 import mt.grigolo.exceptions.ArmyFullException;

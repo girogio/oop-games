@@ -1,6 +1,6 @@
 package mt.grigolo.troops;
 
-import mt.grigolo.Globals;
+import mt.grigolo.utils.Globals;
 import mt.grigolo.troops.types.Archer;
 import mt.grigolo.troops.types.Barbarian;
 import mt.grigolo.troops.types.Goblin;

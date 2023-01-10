@@ -1,6 +1,6 @@
 package mt.grigolo.troops.types;
 
-import mt.grigolo.Globals;
+import mt.grigolo.utils.Globals;
 import mt.grigolo.resources.types.Gold;
 import mt.grigolo.troops.Troop;
 

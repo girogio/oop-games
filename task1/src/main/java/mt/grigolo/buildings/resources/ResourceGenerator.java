@@ -1,10 +1,10 @@
 package mt.grigolo.buildings.resources;
 
-import mt.grigolo.Globals;
+import mt.grigolo.utils.Globals;
 import mt.grigolo.buildings.Building;
 import mt.grigolo.resources.Resource;
 
-import static mt.grigolo.Globals.resGenDefaultGenPerTick;
+import static mt.grigolo.utils.Globals.resGenDefaultGenPerTick;
 
 public class ResourceGenerator extends Building {
 

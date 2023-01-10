@@ -1,6 +1,6 @@
 package mt.grigolo.player;
 
-import mt.grigolo.Globals;
+import mt.grigolo.utils.Globals;
 import mt.grigolo.buildings.Building;
 import mt.grigolo.buildings.resources.types.ElixirGenerator;
 import mt.grigolo.buildings.resources.types.GemGenerator;

@@ -1,12 +1,11 @@
 package mt.grigolo.troops;
 
-import mt.grigolo.Globals;
+import mt.grigolo.utils.Globals;
 import mt.grigolo.exceptions.*;
 import mt.grigolo.players.Village;
 import mt.grigolo.troops.types.Archer;
 import mt.grigolo.troops.types.Barbarian;
 import mt.grigolo.troops.types.Goblin;
-import mt.grigolo.utils.Position;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -37,7 +36,7 @@ public class ArmyTest {
     }
 
     @Test
-    public void emptyInventory() throws MaxLevelException, InsufficientResourceException {
+    public void emptyInventory() {
 
         assertEquals(Globals.initialVillageResourceAmount, v.getGemStorage().getAmount());
 

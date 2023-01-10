@@ -1,9 +1,8 @@
 package mt.grigolo.players;
 
-import mt.grigolo.Globals;
+import mt.grigolo.utils.Globals;
 import mt.grigolo.buildings.Building;
 import mt.grigolo.exceptions.InsufficientResourceException;
-import mt.grigolo.exceptions.MaxLevelException;
 import mt.grigolo.resources.types.Elixir;
 import mt.grigolo.resources.types.Gem;
 import mt.grigolo.resources.types.Gold;

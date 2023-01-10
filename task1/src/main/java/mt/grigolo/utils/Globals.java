@@ -1,4 +1,4 @@
-package mt.grigolo;
+package mt.grigolo.utils;
 
 public class Globals {
 
