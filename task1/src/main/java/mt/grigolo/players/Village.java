@@ -134,10 +134,6 @@ public class Village extends LevelableObject {
         }
     }
 
-    public void levelUpBuilding(int buildingIndex) throws InsufficientResourceException, MaxLevelException {
-        this.getBuildings().get(buildingIndex).levelUp();
-    }
-
 
     public Army getArmy() {
         return army;
