@@ -1,4 +1,4 @@
-package mt.grigolo.buildings.types;
+package mt.grigolo.buildings.troops;
 
 import mt.grigolo.Globals;
 import mt.grigolo.buildings.Building;

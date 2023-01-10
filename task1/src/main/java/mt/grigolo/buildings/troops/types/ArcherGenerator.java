@@ -1,5 +1,6 @@
-package mt.grigolo.buildings.types;
+package mt.grigolo.buildings.troops.types;
 
+import mt.grigolo.buildings.troops.TroopGenerator;
 import mt.grigolo.players.Village;
 import mt.grigolo.troops.types.Archer;
 
