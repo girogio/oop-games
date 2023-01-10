@@ -1,18 +1,15 @@
 package mt.grigolo.game;
 
 import mt.grigolo.players.Player;
-import mt.grigolo.players.types.Human;
-import mt.grigolo.utils.Input;
+import mt.grigolo.players.types.AI;
 
 public class Game {
 
     private final Map map;
 
-    private int round;
 
     public Game(int playerCount, int aiCount, int w, int h) {
-        this.map = new Map(w, h, playerCount, aiCount);
-        this.round = 1;
+        this.map = new Map(w, h, playerCount, aiCount, 1);
     }
 
     public void startGame() {
@@ -21,31 +18,25 @@ public class Game {
 
     public void doRound() {
 
-        for (Player player : map.getPlayers()) {
-            if (player.isAlive()) {
-                if (player instanceof Human) {
-                    Input.clearScreen();
-                    System.out.println("Round " + round + ", player " + player.getId() + "'s turn.");
-                    System.out.println("Map: ");
-                    System.out.println(map);
-                }
-                player.doTurn();
-            } else {
-                map.getPlayers().remove(player);
-            }
-        }
+        map.getPlayers().removeIf(player -> !player.isAlive());
+
+        map.getPlayers().stream().filter(Player::isAlive).forEach(Player::doTurn);
+
         // Win condition
         if (map.getPlayers().size() == 1) {
             System.out.println("Player " + map.getPlayers().get(0).getId() + " won!");
             return;
         }
 
-        // March phase
-        for (Player player : map.getPlayers()) {
-            player.getVillage().getArmy().march();
-        }
+        // Make AI slowly die in agony, and self-inflicted pain.
+        map.getPlayers().stream().filter(player -> player instanceof AI)
+                .forEach(player -> player.getVillage().damage((int) (Math.random() * 10)));
 
-        round++;
+        // March phase
+        map.getPlayers().forEach(player -> player.getVillage().getArmy().march());
+
+        map.round++;
+
         doRound();
     }
 }
