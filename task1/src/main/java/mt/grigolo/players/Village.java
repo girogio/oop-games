@@ -105,10 +105,10 @@ public class Village extends LevelableObject {
         }
         s += "Army:\n";
         s += army;
-        s += "Resources:\n";
-        s += "\t Elixir: " + elixir.getAmount() + "/" + elixir.getMaxAmount() + "\n";
-        s += "\t Gold: " + gold.getAmount() + "/" + gold.getMaxAmount() + "\n";
-        s += "\t Gems: " + gem.getAmount() + "/" + gem.getMaxAmount() + "\n";
+        s += "\nResources:\n";
+        s += "\t " + elixir + " \n";
+        s += "\t " + gold + " \n";
+        s += "\t " + gem + " \n";
         return s;
     }
 
