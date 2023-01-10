@@ -1,6 +1,8 @@
 package mt.grigolo.troops;
 
 import mt.grigolo.Globals;
+import mt.grigolo.exceptions.ArmyBusyException;
+import mt.grigolo.exceptions.ArmyEmptyException;
 import mt.grigolo.exceptions.ArmyFullException;
 import mt.grigolo.players.Village;
 import mt.grigolo.utils.Position;
@@ -15,9 +17,10 @@ public class Army extends ArrayList<Troop> {
     private int ticksUntilArrival;
 
     public boolean isInRange(Village v) {
-        return destination == v && ticksUntilArrival == 0;
+        return currentPos == v.pos && ticksUntilArrival == 0;
     }
 
+    //todo fix movement
     public void addTroop(Troop troop) throws ArmyFullException {
         if (this.size() < getMaxTroops()) {
             add(troop);
@@ -27,61 +30,57 @@ public class Army extends ArrayList<Troop> {
     private final Village sourceVillage;
 
     private Village destination;
+    private Position currentPos;
 
     public int getTicksUntilArrival() {
         return ticksUntilArrival;
     }
 
-    public void setTicksUntilArrival(int ticksUntilArrival) {
-        this.ticksUntilArrival = ticksUntilArrival;
-    }
-
     public void march() {
-        if (ticksUntilArrival > 0) ticksUntilArrival--;
+        if (currentPos != destination.pos && ticksUntilArrival > 0) {
+            ticksUntilArrival--;
+        }
+        if (ticksUntilArrival == 0) {
+            currentPos = destination.pos;
+        }
     }
 
     public Army(Village sourceVillage) {
         this.sourceVillage = sourceVillage;
         this.destination = this.sourceVillage;
+        this.currentPos = this.sourceVillage.pos;
         ticksUntilArrival = 0;
         setMaxTroops(Globals.initialMaxTroops);
     }
 
     public void emptyInventory() {
-        for (Troop troop : this) {
-            sourceVillage.takeFromTroop(troop, troop.getInventory().getAmount());
-        }
+        this.forEach(troop -> sourceVillage.takeFromTroop(troop, troop.getInventory().getAmount()));
         destination = sourceVillage;
     }
 
-    public Village getDestination() {
-        return destination;
-    }
-
-    public Village getSourceVillage() {
-        return sourceVillage;
-    }
-
-    public void setDestination(Village destination) {
+    public void setDestination(Village startPoint, Village destination) {
+        this.ticksUntilArrival = (int) Math.ceil((double) (Position.distance(startPoint.pos, destination.pos) - getArmyMinSpeed()) / getArmyMinSpeed());
+        this.currentPos = startPoint.pos;
         this.destination = destination;
-        ticksUntilArrival = (int) Math.ceil((double) (Position.distance(sourceVillage.pos, destination.pos) - getArmyMinSpeed()) / getArmyMinSpeed());
     }
 
-    public void initiateAttack(Village enemyVillage) {
-        enemyVillage.getEnemyArmies().add(this);
-        setDestination(enemyVillage);
-    }
-
-    public int attackValue() {
-        int totalDamage = 0;
-        for (Troop troop : this) {
-            totalDamage += troop.getAttack();
+    public void initiateAttack(Village enemyVillage) throws ArmyBusyException, ArmyEmptyException {
+        if (!this.isInHomeVillage()) {
+            throw new ArmyBusyException();
+        } else if (isEmpty()) {
+            throw new ArmyEmptyException();
+        } else {
+            setDestination(sourceVillage, enemyVillage);
+            enemyVillage.getEnemyArmies().add(this);
         }
-        return totalDamage;
     }
 
+    public boolean isInHomeVillage() {
+        return ticksUntilArrival == 0 && currentPos.equals(sourceVillage.pos);
+    }
 
     public boolean attack(Village defendingVillage) {
+        boolean fightSuccess = false;
         for (Troop troop : this) {
             if (!defendingVillage.getArmy().isEmpty() && defendingVillage.getArmy().isInHomeVillage()) {
 
@@ -92,32 +91,22 @@ public class Army extends ArrayList<Troop> {
                 this.cleanCorpses();
                 defendingVillage.getArmy().cleanCorpses();
 
-                // stay in the village until there are no more troops
-                return false;
-
             } else {
-
                 // If the defending village has no army, or it is away, attack the village directly
                 defendingVillage.damage(troop.getAttack());
 
                 // take as much resource as possible from the village
                 defendingVillage.giveToTroop(troop, troop.getInventory().getMaxAmount());
 
-                // If the village has been hit, send the troops back to their home
-                return true;
+                fightSuccess = true;
             }
+        }
+        // start returning to base!
+        if (fightSuccess) {
+            setDestination(defendingVillage, sourceVillage);
         }
 
-        if (!defendingVillage.getArmy().isEmpty() && defendingVillage.getArmy().isInHomeVillage()) {
-            for (Troop troop : this) {
-                troop.fight(defendingVillage.getArmy().get((int) (Math.random() * defendingVillage.getArmy().size())));
-                defendingVillage.getArmy().cleanCorpses();
-            }
-            this.cleanCorpses();
-        } else {
-            defendingVillage.damage(attackValue());
-        }
-        return false;
+        return fightSuccess;
     }
 
     public void cleanCorpses() {
@@ -127,11 +116,12 @@ public class Army extends ArrayList<Troop> {
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder("\t Capacity: " + size() + "/" + this.getMaxTroops() + "\n");
-        if (destination != sourceVillage) {
+        if (!isInRange(sourceVillage)) {
             s.append("\t Destination: ").append(destination.pos).append(" (").append(ticksUntilArrival).append(" ticks until arrival)\n");
         } else {
             s.append("\t Destination: ").append(destination.pos).append(" (").append("in home village").append(")\n");
         }
+        s.append("Current position: ").append(currentPos).append("\n");
         for (Troop troop : this) {
             s.append("\t ").append(troop.toString()).append("\n");
         }
@@ -147,9 +137,6 @@ public class Army extends ArrayList<Troop> {
         }
     }
 
-    public boolean isInHomeVillage() {
-        return isInRange(sourceVillage);
-    }
 
     public int getMaxTroops() {
         return maxTroops;
