@@ -1,15 +1,11 @@
 package mt.grigolo.players;
 
 import mt.grigolo.buildings.Building;
+import mt.grigolo.buildings.types.ArcherGenerator;
+import mt.grigolo.buildings.types.BarbarianGenerator;
+import mt.grigolo.buildings.types.GoblinGenerator;
 import mt.grigolo.buildings.types.ResourceGenerator;
-import mt.grigolo.buildings.types.TroopGenerator;
 import mt.grigolo.exceptions.InsufficientResourceException;
-import mt.grigolo.resources.Resource;
-import mt.grigolo.troops.Army;
-import mt.grigolo.troops.Troop;
-import mt.grigolo.troops.types.Archer;
-import mt.grigolo.troops.types.Barbarian;
-import mt.grigolo.troops.types.Goblin;
 
 public abstract class Player {
 
@@ -32,20 +28,20 @@ public abstract class Player {
 
     public abstract void playerInput();
 
-
     public void doTurn() {
+
 
         // Friendly troop arrival
         if (village.getArmy().isInHomeVillage()) {
-            village.getArmy().emptyInventory();
+            getVillage().getArmy().forEach(t -> village.takeFromTroop(t, t.getInventory().getAmount()));
         }
 
         // Enemy troop arrival
-        for (Army enemyArmy : village.getEnemyArmies()) {
-            if (enemyArmy.isInRange(village)) {
-                if (enemyArmy.attack(village)) {
-                    village.getEnemyArmies().remove(enemyArmy);
-                    enemyArmy.setDestination(enemyArmy.getSourceVillage());
+        for (int i = 0; i < village.getEnemyArmies().size(); i++) {
+            if (village.getEnemyArmies().get(i).isInRange(village)) {
+                if (village.getEnemyArmies().get(i).attack(village)) {
+                    village.getEnemyArmies().remove(i);
+                    i--;
                 }
             }
         }
@@ -60,9 +56,9 @@ public abstract class Player {
 
     }
 
-    public boolean build(int building, int type) throws InsufficientResourceException {
+    public void build(int building, int type) throws InsufficientResourceException {
 
-        Building b = null;
+        Building b;
 
         switch (building) {
             case 1 -> {
@@ -70,44 +66,32 @@ public abstract class Player {
                     case 1 -> b = new ResourceGenerator(village.getGemStorage(), village.getGoldStorage());
                     case 2 -> b = new ResourceGenerator(village.getGoldStorage(), village.getElixirStorage());
                     case 3 -> b = new ResourceGenerator(village.getElixirStorage(), village.getGemStorage());
-                    case 4 -> {
-                        return false;
+                    default -> {
+                        return;
                     }
                 }
             }
 
             case 2 -> {
-                Troop t = null;
-                Resource r = null;
                 switch (type) {
-                    case 1 -> {
-                        t = new Archer();
-                        r = getVillage().getGemStorage();
-                    }
-                    case 2 -> {
-                        t = new Goblin();
-                        r = getVillage().getGoldStorage();
-                    }
-                    case 3 -> {
-                        t = new Barbarian();
-                        r = getVillage().getElixirStorage();
-                    }
-                    case 4 -> {
-                        return true;
+                    case 1 -> b = new ArcherGenerator(getVillage());
+                    case 2 -> b = new GoblinGenerator(getVillage());
+                    case 3 -> b = new BarbarianGenerator(getVillage());
+                    default -> {
+                        return;
                     }
                 }
-                assert t != null;
-                b = new TroopGenerator(t, village.getArmy(), r);
             }
+            default -> {
+                return;
+            }
+
         }
 
         try {
-            assert b != null;
             village.buyBuilding(b);
-            return true;
-        } catch (Exception e) {
+        } catch (InsufficientResourceException e) {
             System.out.println(e.getMessage());
-            return false;
         }
     }
 
