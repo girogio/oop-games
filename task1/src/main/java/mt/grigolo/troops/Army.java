@@ -115,17 +115,18 @@ public class Army extends ArrayList<Troop> {
 
     @Override
     public String toString() {
-        StringBuilder s = new StringBuilder("\t Capacity: " + size() + "/" + this.getMaxTroops() + "\n");
-        if (!isInRange(sourceVillage)) {
-            s.append("\t Destination: ").append(destination.pos).append(" (").append(ticksUntilArrival).append(" ticks until arrival)\n");
-        } else {
-            s.append("\t Destination: ").append(destination.pos).append(" (").append("in home village").append(")\n");
+        String s = "Army located at " + currentPos;
+        if (ticksUntilArrival > 0) {
+            s += " and will arrive at " + destination.pos + " in " + ticksUntilArrival + " ticks";
         }
-        s.append("Current position: ").append(currentPos).append("\n");
+
+        s += ".\n\nTroops: \n";
+
         for (Troop troop : this) {
-            s.append("\t ").append(troop.toString()).append("\n");
+            s += "\t   " + troop + "\n";
         }
-        return s.toString();
+
+        return s;
     }
 
     @Override
