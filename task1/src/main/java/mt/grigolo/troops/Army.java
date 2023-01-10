@@ -114,16 +114,23 @@ public class Army extends ArrayList<Troop> {
 
     @Override
     public String toString() {
-        String s = "Army located at " + currentPos;
-        if (ticksUntilArrival > 0) {
-            s += " and will arrive at " + destination.pos + " in " + ticksUntilArrival + " ticks";
-        }
+
+        String s = "Army ";
+
+        if(ticksUntilArrival <= 0)
+            s += "located at " + (isInHomeVillage() ? "home" : currentPos);
+        else
+            s += "on the way to " + destination.pos + ". (" + ticksUntilArrival + " ticks until arrival)";
+
 
         s += ".\n\nTroops: \n";
 
-        for (Troop troop : this) {
-            s += "\t   " + troop + "\n";
-        }
+        StringBuilder sb = new StringBuilder();
+
+        for (Troop troop : this)
+            sb.append("\t   ").append(troop).append("\n");
+
+        s += sb.toString();
 
         return s;
     }
