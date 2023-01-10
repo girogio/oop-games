@@ -1,7 +1,11 @@
 package mt.grigolo.players.types;
 
 import mt.grigolo.buildings.Building;
-import mt.grigolo.buildings.types.*;
+import mt.grigolo.buildings.resources.ResourceGenerator;
+import mt.grigolo.buildings.troops.TroopGenerator;
+import mt.grigolo.buildings.troops.types.ArcherGenerator;
+import mt.grigolo.buildings.troops.types.BarbarianGenerator;
+import mt.grigolo.buildings.troops.types.GoblinGenerator;
 import mt.grigolo.exceptions.*;
 import mt.grigolo.game.Map;
 import mt.grigolo.players.Player;
@@ -56,6 +60,7 @@ public class Human extends Player {
             System.out.println("2. Troop Generator");
             System.out.println("3. Back");
             System.out.print("> ");
+
             building = Input.getInt(1, 3);
 
             Input.clearScreen();
@@ -97,6 +102,7 @@ public class Human extends Player {
                     build(building, type);
                 } catch (InsufficientResourceException e) {
                     System.out.println("\n\n" + e.getMessage() + "\n\n");
+                    Input.pause();
                 }
             }
 
@@ -124,10 +130,11 @@ public class Human extends Player {
                     if (buildingToLevelUp == 1) {
                         getVillage().levelUp();
                     } else {
-                        getVillage().levelUpBuilding(buildingToLevelUp - 2);
+                        getVillage().getBuildings().get(buildingToLevelUp - 2).levelUp();
                     }
                 } catch (InsufficientResourceException | MaxLevelException e) {
                     System.out.println("\n\n" + e.getMessage() + "\n\n");
+                    Input.pause();
                 }
             }
 
@@ -161,6 +168,7 @@ public class Human extends Player {
                     getVillage().getBuildings().get(troopGenerators.get(troopToTrain - 1)).interact();
                 } catch (InsufficientResourceException | ArmyFullException | ArmyAwayException e) {
                     System.out.println("\n\n" + e.getMessage() + "\n\n");
+                    Input.pause();
                 }
             }
 
@@ -197,6 +205,7 @@ public class Human extends Player {
                 getVillage().getArmy().initiateAttack(Map.players.get(villages.get(villageToAttack - 1)).getVillage());
             } catch (ArmyEmptyException | ArmyBusyException e) {
                 System.out.println("\n\n" + e.getMessage() + "\n\n");
+                Input.pause();
             }
 
 
