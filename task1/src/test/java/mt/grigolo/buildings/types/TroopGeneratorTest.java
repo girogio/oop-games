@@ -1,9 +1,10 @@
 package mt.grigolo.buildings.types;
 
+import mt.grigolo.exceptions.ArmyAwayException;
+import mt.grigolo.exceptions.ArmyFullException;
 import mt.grigolo.exceptions.InsufficientResourceException;
 import mt.grigolo.exceptions.MaxLevelException;
 import mt.grigolo.players.Village;
-import mt.grigolo.troops.types.Archer;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,8 +17,7 @@ public class TroopGeneratorTest {
 
     @Before
     public void setUp() {
-        village = new Village(0, 0);
-        troopGenerator = new TroopGenerator(new Archer(), village.getArmy(), village.getGemStorage(), 10);
+        troopGenerator = new ArcherGenerator(village);
     }
 
     @Test
@@ -28,7 +28,7 @@ public class TroopGeneratorTest {
     }
 
     @Test
-    public void interact() throws InsufficientResourceException {
+    public void interact() throws InsufficientResourceException, ArmyFullException, ArmyAwayException {
         troopGenerator.doTick();
         assertEquals(0, village.getArmy().size());
         troopGenerator.interact();
@@ -41,8 +41,8 @@ public class TroopGeneratorTest {
     }
 
 
-    @Test (expected = InsufficientResourceException.class)
-    public void interactInsufficientResource() throws InsufficientResourceException {
+    @Test(expected = InsufficientResourceException.class)
+    public void interactInsufficientResource() throws InsufficientResourceException, ArmyFullException, ArmyAwayException {
         village.getGemStorage().setAmount(0);
         troopGenerator.interact();
     }

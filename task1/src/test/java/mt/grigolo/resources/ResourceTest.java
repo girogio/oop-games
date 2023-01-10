@@ -64,15 +64,9 @@ public class ResourceTest {
 
     @Test
     public void testResource() {
-        Resource resource = new Resource(100, 1000) {
-            @Override
-            public String getName() {
-                return "Test/s";
-            }
-        };
+        Resource resource = new Gold(100, 1000);
         assertEquals(100, resource.getAmount());
         assertEquals(1000, resource.getMaxAmount());
-        assertEquals("Test/s", resource.getName());
     }
 
     @Test

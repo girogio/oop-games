@@ -3,23 +3,19 @@ package mt.grigolo.utils;
 import mt.grigolo.exceptions.InsufficientResourceException;
 import mt.grigolo.exceptions.MaxLevelException;
 import mt.grigolo.resources.Resource;
+import mt.grigolo.resources.types.Gold;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
 public class LevelableObjectTest {
-    LevelableObject levelableObject = new LevelableObject(10, 10, 10, new Resource(1000, 1000) {
+
+    LevelableObject levelableObject = new LevelableObject(10, 10, 10, new Gold(1000, 1000)) {
         @Override
-        public String getName() {
-            return "Test Currency";
-        }
-    }) {
-        @Override
-        public void levelUpLogic() {
-            // do nothing
+        protected void levelUpLogic() {
+
         }
     };
-
 
     @Test
     public void levelUp() throws MaxLevelException, InsufficientResourceException {
@@ -40,12 +36,7 @@ public class LevelableObjectTest {
 
     @Test(expected = InsufficientResourceException.class)
     public void levelUpInsufficientResource() throws MaxLevelException, InsufficientResourceException {
-        levelableObject.setLevelUpResource(new Resource(0, 0) {
-            @Override
-            public String getName() {
-                return "Test Currency";
-            }
-        });
+        levelableObject.setLevelUpResource(new Gold(0, 0));
         levelableObject.levelUp();
     }
 }

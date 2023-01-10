@@ -1,6 +1,9 @@
 package mt.grigolo.player;
 
+import mt.grigolo.buildings.Building;
+import mt.grigolo.buildings.types.GoblinGenerator;
 import mt.grigolo.buildings.types.ResourceGenerator;
+import mt.grigolo.exceptions.ArmyAwayException;
 import mt.grigolo.exceptions.ArmyFullException;
 import mt.grigolo.exceptions.InsufficientResourceException;
 import mt.grigolo.exceptions.MaxLevelException;
@@ -92,7 +95,16 @@ public class VillageTest {
     }
 
     @Test
-    public void initiateAttack() {
+    public void initiateAttack() throws ArmyFullException, ArmyAwayException, InsufficientResourceException, MaxLevelException {
+        Building ala = new GoblinGenerator(villageA);
 
+        villageA.levelUp();
+
+        ala.interact();
+        ala.interact();
+
+        villageA.getArmy().get(1).setHealth(2);
+
+        System.out.println(villageA);
     }
 }

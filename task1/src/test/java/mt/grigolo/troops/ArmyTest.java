@@ -1,9 +1,7 @@
 package mt.grigolo.troops;
 
 import mt.grigolo.Globals;
-import mt.grigolo.exceptions.ArmyFullException;
-import mt.grigolo.exceptions.InsufficientResourceException;
-import mt.grigolo.exceptions.MaxLevelException;
+import mt.grigolo.exceptions.*;
 import mt.grigolo.players.Village;
 import mt.grigolo.troops.types.Archer;
 import mt.grigolo.troops.types.Barbarian;
@@ -12,7 +10,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 public class ArmyTest {
     Village v;
@@ -41,7 +40,6 @@ public class ArmyTest {
 
         assertEquals(Globals.initialVillageResourceAmount, v.getGemStorage().getAmount());
 
-
         v.getArmy().emptyInventory();
 
         for (Troop t : v.getArmy()) {
@@ -59,37 +57,39 @@ public class ArmyTest {
     }
 
     @Test
-    public void marchTest() throws ArmyFullException {
+    public void marchTest() throws ArmyFullException, ArmyBusyException, ArmyEmptyException {
         Village v1 = new Village(0, 0);
         Village v2 = new Village(10, 1);
 
         v1.getArmy().addTroop(new Archer());
-        v1.getArmy().setDestination(v2);
 
-        assertEquals(1, v1.getArmy().getTicksUntilArrival());
+        v1.getArmy().initiateAttack(v2);
+
+        assertEquals(10, v1.getArmy().getTicksUntilArrival());
 
         v1.getArmy().march();
 
-        assertEquals(0, v1.getArmy().getTicksUntilArrival());
+        assertEquals(9, v1.getArmy().getTicksUntilArrival());
 
-        assertTrue(v1.getArmy().isInRange(v2));
+        assertFalse(v1.getArmy().isInRange(v2));
     }
 
 
     @Test
-    public void initiateAttack() throws ArmyFullException {
+    public void initiateAttack() throws ArmyFullException, ArmyBusyException, ArmyEmptyException {
         Village v1 = new Village(0, 0);
         Village v2 = new Village(10, 1);
         v1.getArmy().addTroop(new Archer());
         v1.getArmy().initiateAttack(v2);
 
         assertFalse(v1.getArmy().isInRange(v2));
-        assertEquals(1, v1.getArmy().getTicksUntilArrival());
+
+        assertEquals(10, v1.getArmy().getTicksUntilArrival());
 
         v1.getArmy().march();
+        assertFalse(v1.getArmy().isInRange(v2));
 
-        assertTrue(v1.getArmy().isInRange(v2));
-        assertEquals(0, v1.getArmy().getTicksUntilArrival());
+        assertEquals(9, v1.getArmy().getTicksUntilArrival());
         assertEquals(1, v2.getEnemyArmies().size());
         assertEquals(v1.getArmy(), v2.getEnemyArmies().get(0));
     }
