@@ -1,10 +1,10 @@
 package mt.grigolo.troops;
 
-import mt.grigolo.utils.Globals;
 import mt.grigolo.exceptions.ArmyBusyException;
 import mt.grigolo.exceptions.ArmyEmptyException;
 import mt.grigolo.exceptions.ArmyFullException;
 import mt.grigolo.players.Village;
+import mt.grigolo.utils.Globals;
 import mt.grigolo.utils.Position;
 
 import java.util.ArrayList;

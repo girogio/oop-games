@@ -1,6 +1,5 @@
 package mt.grigolo.players;
 
-import mt.grigolo.utils.Globals;
 import mt.grigolo.buildings.Building;
 import mt.grigolo.exceptions.InsufficientResourceException;
 import mt.grigolo.resources.types.Elixir;
@@ -8,6 +7,7 @@ import mt.grigolo.resources.types.Gem;
 import mt.grigolo.resources.types.Gold;
 import mt.grigolo.troops.Army;
 import mt.grigolo.troops.Troop;
+import mt.grigolo.utils.Globals;
 import mt.grigolo.utils.LevelableObject;
 import mt.grigolo.utils.Position;
 

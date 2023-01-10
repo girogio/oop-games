@@ -1,6 +1,5 @@
 package mt.grigolo.buildings.troops;
 
-import mt.grigolo.utils.Globals;
 import mt.grigolo.buildings.Building;
 import mt.grigolo.exceptions.ArmyAwayException;
 import mt.grigolo.exceptions.ArmyFullException;
@@ -8,6 +7,7 @@ import mt.grigolo.exceptions.InsufficientResourceException;
 import mt.grigolo.resources.Resource;
 import mt.grigolo.troops.Army;
 import mt.grigolo.troops.Troop;
+import mt.grigolo.utils.Globals;
 
 public abstract class TroopGenerator extends Building {
 

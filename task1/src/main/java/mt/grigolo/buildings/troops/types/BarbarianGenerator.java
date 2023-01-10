@@ -1,7 +1,7 @@
 package mt.grigolo.buildings.troops.types;
 
 import mt.grigolo.buildings.troops.TroopGenerator;
-import mt.grigolo.players.*;
+import mt.grigolo.players.Village;
 import mt.grigolo.troops.types.Barbarian;
 
 public class BarbarianGenerator extends TroopGenerator {

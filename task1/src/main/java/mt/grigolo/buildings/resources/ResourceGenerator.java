@@ -1,8 +1,8 @@
 package mt.grigolo.buildings.resources;
 
-import mt.grigolo.utils.Globals;
 import mt.grigolo.buildings.Building;
 import mt.grigolo.resources.Resource;
+import mt.grigolo.utils.Globals;
 
 import static mt.grigolo.utils.Globals.resGenDefaultGenPerTick;
 
