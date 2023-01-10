@@ -178,6 +178,8 @@ public class Human extends Player {
 
             ArrayList<Integer> villages = new ArrayList<>();
 
+            // TODO: Map correct villages to correct indics
+
             for (int i = 0; i < Map.players.size(); i++) {
                 if (!this.equals(Map.players.get(i))) {
                     Player p = Map.players.get(i);
@@ -188,13 +190,13 @@ public class Human extends Player {
                 }
             }
 
-            System.out.println(Map.players.size() + 1 + ". Back");
+            System.out.println(Map.players.size() + ". Back");
             System.out.print("> ");
 
 
-            int villageToAttack = Input.getInt(1, Map.players.size() + 1);
+            int villageToAttack = Input.getInt(1, Map.players.size());
 
-            if (villageToAttack == Map.players.size() + 1) {
+            if (villageToAttack == Map.players.size()) {
                 playerInput();
                 return;
             }
