@@ -1,5 +1,7 @@
 package mt.grigolo.buildings.types;
 
+import mt.grigolo.buildings.troops.TroopGenerator;
+import mt.grigolo.buildings.troops.types.ArcherGenerator;
 import mt.grigolo.exceptions.ArmyAwayException;
 import mt.grigolo.exceptions.ArmyFullException;
 import mt.grigolo.exceptions.InsufficientResourceException;
@@ -17,6 +19,7 @@ public class TroopGeneratorTest {
 
     @Before
     public void setUp() {
+        village = new Village(4, 12);
         troopGenerator = new ArcherGenerator(village);
     }
 
@@ -31,10 +34,6 @@ public class TroopGeneratorTest {
     public void interact() throws InsufficientResourceException, ArmyFullException, ArmyAwayException {
         troopGenerator.doTick();
         assertEquals(0, village.getArmy().size());
-        troopGenerator.interact();
-        troopGenerator.interact();
-        troopGenerator.interact();
-        troopGenerator.interact();
         troopGenerator.interact();
         troopGenerator.interact();
         assertEquals(2, village.getArmy().size());

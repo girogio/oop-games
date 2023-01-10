@@ -1,13 +1,13 @@
 package mt.grigolo.troops;
 
+import mt.grigolo.Globals;
 import mt.grigolo.troops.types.Archer;
 import mt.grigolo.troops.types.Barbarian;
 import mt.grigolo.troops.types.Goblin;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class TroopTest {
 
@@ -24,37 +24,37 @@ public class TroopTest {
 
     @Test
     public void testGetHealth() {
-        assertEquals(goblin.getHealth(), 75);
-        assertEquals(archer.getHealth(), 100);
-        assertEquals(barbarian.getHealth(), 150);
+        assertEquals(goblin.getHealth(), Globals.goblinHealth);
+        assertEquals(archer.getHealth(), Globals.archerHealth);
+        assertEquals(barbarian.getHealth(), Globals.barbarianHealth);
     }
 
     @Test
     public void testGetMaxHealth() {
-        assertEquals(goblin.getMaxHealth(), 75);
-        assertEquals(archer.getMaxHealth(), 100);
-        assertEquals(barbarian.getMaxHealth(), 150);
+        assertEquals(goblin.getMaxHealth(), Globals.goblinHealth);
+        assertEquals(archer.getMaxHealth(), Globals.archerHealth);
+        assertEquals(barbarian.getMaxHealth(), Globals.barbarianHealth);
     }
 
     @Test
     public void testGetAttack() {
-        assertEquals(goblin.getAttack(), 50);
-        assertEquals(archer.getAttack(), 100);
-        assertEquals(barbarian.getAttack(), 150);
+        assertEquals(goblin.getAttack(), Globals.goblinDamage);
+        assertEquals(archer.getAttack(), Globals.archerDamage);
+        assertEquals(barbarian.getAttack(), Globals.barbarianDamage);
     }
 
     @Test
     public void testGetCost() {
-        assertEquals(goblin.getCost(), 50);
-        assertEquals(archer.getCost(), 100);
-        assertEquals(barbarian.getCost(), 100);
+        assertEquals(goblin.getCost(), Globals.goblinCost);
+        assertEquals(archer.getCost(), Globals.archerCost);
+        assertEquals(barbarian.getCost(), Globals.barbarianCost);
     }
 
     @Test
     public void testGetMaxCapacity() {
-        assertEquals(archer.getInventory().getMaxAmount(), 10);
-        assertEquals(barbarian.getInventory().getMaxAmount(), 50);
-        assertEquals(goblin.getInventory().getMaxAmount(), 100);
+        assertEquals(goblin.getInventory().getMaxAmount(), Globals.goblinMaxInventory);
+        assertEquals(archer.getInventory().getMaxAmount(), Globals.archerMaxInventory);
+        assertEquals(barbarian.getInventory().getMaxAmount(), Globals.barbarianMaxInventory);
     }
 
     @Test
@@ -86,17 +86,17 @@ public class TroopTest {
 
     @Test
     public void testGetMarchingSpeed() {
-        assertEquals(barbarian.getMarchingSpeed(), 5);
-        assertEquals(goblin.getMarchingSpeed(), 7);
-        assertEquals(archer.getMarchingSpeed(), 10);
+        assertEquals(archer.getMarchingSpeed(), Globals.archerSpeed);
+        assertEquals(barbarian.getMarchingSpeed(), Globals.barbarianSpeed);
+        assertEquals(goblin.getMarchingSpeed(), Globals.goblinSpeed);
     }
 
     @Test
     public void testFight() {
         archer.fight(barbarian);
-        assertEquals(archer.getHealth(), 0);
-        assertEquals(barbarian.getHealth(), 50);
-        assertTrue(archer.isDead());
+        assertEquals(archer.getHealth(), Globals.archerHealth - Globals.barbarianDamage);
+        assertEquals(barbarian.getHealth(), Globals.barbarianHealth - Globals.archerDamage);
+        assertFalse(archer.isDead());
     }
 
 }

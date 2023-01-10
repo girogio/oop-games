@@ -6,6 +6,7 @@ import mt.grigolo.players.Village;
 import mt.grigolo.troops.types.Archer;
 import mt.grigolo.troops.types.Barbarian;
 import mt.grigolo.troops.types.Goblin;
+import mt.grigolo.utils.Position;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -47,7 +48,7 @@ public class ArmyTest {
         }
 
         assertEquals(110, v.getGemStorage().getAmount());
-        assertEquals(150, v.getGoldStorage().getAmount());
+        assertEquals(110, v.getGoldStorage().getAmount());
         assertEquals(100, v.getElixirStorage().getAmount());
     }
 
@@ -65,11 +66,11 @@ public class ArmyTest {
 
         v1.getArmy().initiateAttack(v2);
 
-        assertEquals(10, v1.getArmy().getTicksUntilArrival());
+        assertEquals(5, v1.getArmy().getTicksUntilArrival());
 
         v1.getArmy().march();
 
-        assertEquals(9, v1.getArmy().getTicksUntilArrival());
+        assertEquals(4, v1.getArmy().getTicksUntilArrival());
 
         assertFalse(v1.getArmy().isInRange(v2));
     }
@@ -84,12 +85,12 @@ public class ArmyTest {
 
         assertFalse(v1.getArmy().isInRange(v2));
 
-        assertEquals(10, v1.getArmy().getTicksUntilArrival());
+        assertEquals(5, v1.getArmy().getTicksUntilArrival());
 
         v1.getArmy().march();
         assertFalse(v1.getArmy().isInRange(v2));
 
-        assertEquals(9, v1.getArmy().getTicksUntilArrival());
+        assertEquals(4, v1.getArmy().getTicksUntilArrival());
         assertEquals(1, v2.getEnemyArmies().size());
         assertEquals(v1.getArmy(), v2.getEnemyArmies().get(0));
     }

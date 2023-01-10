@@ -1,5 +1,6 @@
 package mt.grigolo.buildings.types;
 
+import mt.grigolo.buildings.resources.ResourceGenerator;
 import mt.grigolo.exceptions.InsufficientResourceException;
 import mt.grigolo.exceptions.MaxLevelException;
 import mt.grigolo.players.Village;

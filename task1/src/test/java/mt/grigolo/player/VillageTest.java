@@ -1,8 +1,11 @@
 package mt.grigolo.player;
 
+import mt.grigolo.Globals;
 import mt.grigolo.buildings.Building;
-import mt.grigolo.buildings.types.GoblinGenerator;
-import mt.grigolo.buildings.types.ResourceGenerator;
+import mt.grigolo.buildings.resources.types.ElixirGenerator;
+import mt.grigolo.buildings.resources.types.GemGenerator;
+import mt.grigolo.buildings.resources.types.GoldGenerator;
+import mt.grigolo.buildings.troops.types.GoblinGenerator;
 import mt.grigolo.exceptions.ArmyAwayException;
 import mt.grigolo.exceptions.ArmyFullException;
 import mt.grigolo.exceptions.InsufficientResourceException;
@@ -28,30 +31,23 @@ public class VillageTest {
     }
 
     @Test
-    public void getGoldStorage() {
-        assertEquals(100, villageA.getGoldStorage().getAmount());
-    }
+    public void testGetStorages() {
+        assertEquals(Globals.initialVillageResourceAmount, villageA.getGoldStorage().getAmount());
+        assertEquals(Globals.initialVillageResourceAmount, villageA.getGemStorage().getAmount());
+        assertEquals(Globals.initialVillageResourceAmount, villageA.getElixirStorage().getAmount());
 
-    @Test
-    public void getGemStorage() {
-        assertEquals(100, villageA.getGemStorage().getAmount());
-    }
-
-    @Test
-    public void getElixirStorage() {
-        assertEquals(100, villageA.getElixirStorage().getAmount());
     }
 
     @Test
     public void doTick() {
-        villageA.getBuildings().add(new ResourceGenerator(villageA.getGemStorage(), villageA.getGoldStorage()));
-        villageA.getBuildings().add(new ResourceGenerator(villageA.getGoldStorage(), villageA.getGoldStorage()));
-        villageA.getBuildings().add(new ResourceGenerator(villageA.getElixirStorage(), villageA.getGoldStorage()));
+        villageA.getBuildings().add(new GemGenerator(villageA));
+        villageA.getBuildings().add(new GoldGenerator(villageA));
+        villageA.getBuildings().add(new ElixirGenerator(villageA));
 
         villageA.doTick();
-        assertEquals(110, villageA.getGoldStorage().getAmount());
-        assertEquals(110, villageA.getGemStorage().getAmount());
-        assertEquals(110, villageA.getElixirStorage().getAmount());
+        assertEquals(Globals.initialVillageResourceAmount + 10, villageA.getGoldStorage().getAmount());
+        assertEquals(Globals.initialVillageResourceAmount + 10, villageA.getGemStorage().getAmount());
+        assertEquals(Globals.initialVillageResourceAmount + 10, villageA.getElixirStorage().getAmount());
     }
 
     @Test
@@ -98,6 +94,7 @@ public class VillageTest {
     public void initiateAttack() throws ArmyFullException, ArmyAwayException, InsufficientResourceException, MaxLevelException {
         Building ala = new GoblinGenerator(villageA);
 
+        villageA.getGemStorage().setAmount(600);
         villageA.levelUp();
 
         ala.interact();
