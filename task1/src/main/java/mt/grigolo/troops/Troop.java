@@ -60,10 +60,10 @@ public abstract class Troop {
 
     @Override
     public String toString() {
-        String s = getClass().getSimpleName() + ": " + health + "/" + maxHealth + "hp, ";
+        String s = getClass().getSimpleName() + " (" + health + "/" + maxHealth + "hp, ";
         s += "Attack: " + attack + ", ";
-        s += "Capacity: " + this.getInventory() + ", ";
-        s += "Speed: " + marchingSpeed + "";
+        s += this.getInventory() + ", ";
+        s += "Speed: " + marchingSpeed + ")";
         return s;
     }
 
