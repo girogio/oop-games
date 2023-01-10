@@ -25,11 +25,20 @@ public class Game {
 
         // Win condition
         if (map.getPlayers().size() == 1) {
-            System.out.println("Player " + map.getPlayers().get(0).getId() + " won!");
+            Input.clearScreen();
+            System.out.println("""
+                    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+                    ░░░░█▀▀▀░█▀▀▀░░█▀▀░▀▀█░░█░░░░
+                    ░░░░█░▀█░█░▀█░░█▀▀░▄▀░░░▀░░░░
+                    ░░░░▀▀▀▀░▀▀▀▀░░▀▀▀░▀▀▀░░▀░░░░
+                    ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+                    """);
+            System.out.println("Player " + map.getPlayers().get(0).getId() + " won!\n");
             Input.closeScanner();
             return;
         }
 
+        // TODO: Remove when AI choices implemented.
         // Make AI slowly die in agony, and self-inflicted pain.
         map.getPlayers().stream().filter(player -> player instanceof AI)
                 .forEach(player -> player.getVillage().damage((int) (Math.random() * 10)));

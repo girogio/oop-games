@@ -20,7 +20,6 @@ public class Army extends ArrayList<Troop> {
         return currentPos == v.pos && ticksUntilArrival == 0;
     }
 
-    //todo fix movement
     public void addTroop(Troop troop) throws ArmyFullException {
         if (this.size() < getMaxTroops()) {
             add(troop);

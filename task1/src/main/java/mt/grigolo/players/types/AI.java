@@ -10,7 +10,7 @@ public class AI extends Player {
 
     @Override
     public void playerInput() {
-        //TODO: Random choices
+        //TODO: AI logic.
     }
 
 }
