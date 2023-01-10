@@ -97,18 +97,20 @@ public class Village extends LevelableObject {
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
-        s.append("Lvl. ").append(getLevel()).append(" village at (").append(pos.getX()).append(", ")
-                .append(pos.getY()).append(") with ").append(health).append("/").append(maxHealth).append("hp\n");
-        s.append("Buildings:\n");
-        for (Building b : getBuildings()) {
-            s.append("\t ").append(b).append("\n");
-        }
-        s.append("Army:\n");
+        s.append("Lvl. ").append(getLevel()).append(" Village at ").append(pos).append(" with ")
+                .append(health).append("/").append(maxHealth).append("hp.\n");
+        s.append("-----------------------------------------------------").append("\n\n");
         s.append(army);
+        s.append("\nBuildings:\n");
+        if (villageBuildings.size() == 0) s.append("\t   None\n");
+        else
+            for (Building b : getBuildings())
+                s.append("\t   ").append(b).append("\n");
+
         s.append("\nResources:\n");
-        s.append("\t ").append(elixir).append(" \n");
-        s.append("\t ").append(gold).append(" \n");
-        s.append("\t ").append(gem).append(" \n");
+        s.append("\t   ").append(elixir).append(" \n");
+        s.append("\t   ").append(gold).append(" \n");
+        s.append("\t   ").append(gem).append(" \n");
         return s.toString();
     }
 
