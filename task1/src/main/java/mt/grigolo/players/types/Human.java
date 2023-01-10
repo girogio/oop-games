@@ -35,11 +35,10 @@ public class Human extends Player {
 
         Input.clearScreen();
 
-        System.out.println("Round " + map.round + ", player " + getId() + "'s turn.");
-        System.out.println(map);
+        System.out.println("Round " + map.round + ", player " + getId() + "'s turn.\n\n");
+        System.out.println(map + "\n\n");
 
-
-        System.out.println(getVillage());
+        System.out.println("P" + getId() + "'s " + getVillage());
 
         System.out.println("1. Build");
         System.out.println("2. Upgrade");
@@ -139,15 +138,15 @@ public class Human extends Player {
             }
 
         } else if (choice == 3) {
-            System.out.println("Choose troop to train\n ");
-
+            Input.clearScreen();
             for (int i = 0; i < getVillage().getBuildings().stream().filter(building -> building instanceof TroopGenerator).count(); i++) {
                 TroopGenerator b = (TroopGenerator) getVillage().getBuildings().stream().filter(building -> building instanceof TroopGenerator).toArray()[i];
-                System.out.println((i + 1) + ". " + b.getInteractCostString() + " – " + b);
+                System.out.println((i + 1) + ". " + b.getInteractCostString() + " – " + b.generatedTroop());
             }
 
             System.out.println(getVillage().getBuildings().stream().filter(building -> building instanceof TroopGenerator).count() + 1 + ". Back");
 
+            System.out.println("\nChoose troop index to train.\n ");
             System.out.print("> ");
 
             ArrayList<Integer> troopGenerators = new ArrayList<>();
