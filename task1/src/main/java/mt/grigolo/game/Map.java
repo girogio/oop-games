@@ -10,15 +10,14 @@ public class Map {
 
     private final int width;
     private final int height;
-    public int round;
+    public int round = 1;
 
     public static final ArrayList<Player> players = new ArrayList<>();
 
 
-    public Map(int width, int height, int playerCount, int aiCount, int round) {
+    public Map(int width, int height, int playerCount, int aiCount) {
         this.width = width;
         this.height = height;
-        this.round = round;
 
         int x, y;
 
@@ -49,7 +48,6 @@ public class Map {
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
-        //print top border
         s.append("  ");
         for (int i = 0; i < width; i++) {
             s.append(" ").append(i).append(" ");
@@ -62,9 +60,17 @@ public class Map {
                 for (Player player : players) {
                     if (player.getVillage().pos.getX() == j && player.getVillage().pos.getY() == i && player.isAlive()) {
                         if (player instanceof Human) {
-                            s.append(" H ");
+                            if (!player.getVillage().getArmy().isInHomeVillage()) {
+                                s.append(" M ");
+                            } else {
+                                s.append(" H ");
+                            }
                         } else if (player instanceof AI) {
-                            s.append(" A ");
+                            if (!player.getVillage().getArmy().isInHomeVillage()) {
+                                s.append(" M ");
+                            } else {
+                                s.append(" A ");
+                            }
                         }
                         found = true;
                     }

@@ -2,6 +2,7 @@ package mt.grigolo.game;
 
 import mt.grigolo.players.Player;
 import mt.grigolo.players.types.AI;
+import mt.grigolo.utils.Input;
 
 public class Game {
 
@@ -9,7 +10,7 @@ public class Game {
 
 
     public Game(int playerCount, int aiCount, int w, int h) {
-        this.map = new Map(w, h, playerCount, aiCount, 1);
+        this.map = new Map(w, h, playerCount, aiCount);
     }
 
     public void startGame() {
@@ -25,6 +26,7 @@ public class Game {
         // Win condition
         if (map.getPlayers().size() == 1) {
             System.out.println("Player " + map.getPlayers().get(0).getId() + " won!");
+            Input.closeScanner();
             return;
         }
 
