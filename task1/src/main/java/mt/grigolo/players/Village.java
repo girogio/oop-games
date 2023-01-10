@@ -96,19 +96,20 @@ public class Village extends LevelableObject {
 
     @Override
     public String toString() {
-        String s = "";
-        s += "Lvl. " + getLevel() + " village at (" + pos.getX() + ", " + pos.getY() + ") with " + health + "/" + maxHealth + "hp\n";
-        s += "Buildings:\n";
+        StringBuilder s = new StringBuilder();
+        s.append("Lvl. ").append(getLevel()).append(" village at (").append(pos.getX()).append(", ")
+                .append(pos.getY()).append(") with ").append(health).append("/").append(maxHealth).append("hp\n");
+        s.append("Buildings:\n");
         for (Building b : getBuildings()) {
-            s += "\t " + b + "\n";
+            s.append("\t ").append(b).append("\n");
         }
-        s += "Army:\n";
-        s += army;
-        s += "\nResources:\n";
-        s += "\t " + elixir + " \n";
-        s += "\t " + gold + " \n";
-        s += "\t " + gem + " \n";
-        return s;
+        s.append("Army:\n");
+        s.append(army);
+        s.append("\nResources:\n");
+        s.append("\t ").append(elixir).append(" \n");
+        s.append("\t ").append(gold).append(" \n");
+        s.append("\t ").append(gem).append(" \n");
+        return s.toString();
     }
 
     public void giveToTroop(Troop troop, int amount) {
