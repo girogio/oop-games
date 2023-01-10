@@ -20,7 +20,7 @@ public abstract class Building extends LevelableObject {
     }
 
     public String getBuildCostString() {
-        return getBuildCost() + " " + getLevelUpResource().getName();;
+        return getBuildCost() + " " + getLevelUpResource().getName();
     }
 
     public abstract void doTick();
