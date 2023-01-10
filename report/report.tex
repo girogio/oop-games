@@ -1,0 +1,77 @@
+\documentclass{article}
+
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{parskip}
+
+
+\title{Object Oriented Programming Report}
+\author{Giorgio Grigolo}
+\date{Semester 1, 2022}
+
+\begin{document}
+
+\maketitle
+\begin{abstract}
+This report is a summary of the Object Oriented Programming course.
+\end{abstract}
+
+
+\newpage
+
+\section{Minesweeper --- A C++ Implementation}
+
+\subsection{Introduction}
+Minesweeper is a logic puzzle video game genre generally played on personal
+computers. The game features a grid of clickable squares, with hidden ``mines''
+scattered throughout the board. The objective is to clear the board without
+detonating any mines, with help from clues about the number of neighboring
+mines in each field.
+
+In this report, we will implement Minesweeper with the help of
+ncurses\footnote{Ncurses is a programming library providing an application with a 
+terminal-independent screen-painting and keyboard-handling facility in a
+text-mode environment.} and C++.
+
+\subsection{The Game}
+The game is played on a board of tiles, each of which is either a mine or
+empty. The player is initially presented with a board of all empty tiles, and
+must use logic to deduce the locations of the mines. The player can click on a
+tile to reveal it. If the tile is a mine, the player loses. If the tile is
+empty, the tile will be revealed, and if it has no neighboring mines, all of
+its neighboring tiles will be revealed as well. If the tile has neighboring
+mines, the number of neighboring mines will be displayed on the tile. If the player
+marks all of the mines, the player wins.
+
+
+\subsection{The Implementation}
+
+\subsubsection{UML}
+
+% \begin{figure}[h]
+% \centering
+% \includegraphics[width=0.8\textwidth]{mine_UML.png}
+% \caption{UML Diagram}
+% \end{figure}
+
+
+\subsubsection{The Board}
+
+The board is a 2D array of tiles. The board is initialized with a given number
+of mines, and the rest of the tiles are empty. The board is displayed using
+ncurses. The board is updated when the player clicks on a tile.
+
+
+\subsection{The Design}
+
+\subsection{The Code}
+
+\subsection{The Results}
+
+
+
+\end{document}
