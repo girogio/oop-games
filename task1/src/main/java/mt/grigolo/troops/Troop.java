@@ -62,16 +62,14 @@ public abstract class Troop {
     public String toString() {
         String s = getClass().getSimpleName() + ": " + health + "/" + maxHealth + "hp, ";
         s += "Attack: " + attack + ", ";
-        s += "Capacity: " + getInventory().getAmount() + "/" + getInventory().getMaxAmount() + ", ";
+        s += "Capacity: " + this.getInventory() + ", ";
         s += "Speed: " + marchingSpeed + "";
         return s;
     }
 
     public void fight(Troop enemyTroop) {
-        enemyTroop.health -= this.attack;
-        this.health -= enemyTroop.attack;
-        this.health = Math.max(0, this.health);
-        enemyTroop.health = Math.max(0, enemyTroop.health);
+        this.health = Math.max(0, this.health - enemyTroop.attack);
+        enemyTroop.health = Math.max(0, enemyTroop.health - this.attack);
     }
 
     public boolean isDead() {

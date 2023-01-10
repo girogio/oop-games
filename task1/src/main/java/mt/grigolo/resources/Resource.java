@@ -1,5 +1,6 @@
 package mt.grigolo.resources;
 
+import mt.grigolo.resources.types.Gem;
 import mt.grigolo.troops.Troop;
 
 public abstract class Resource {
@@ -60,5 +61,14 @@ public abstract class Resource {
             this.increment(amountToTake);
             troop.getInventory().decrement(amountToTake);
         }
+    }
+
+    @Override
+    public String toString() {
+        return amount + "/" + maxAmount + " " + this.getClass().getSimpleName() + (this.getClass().equals(Gem.class) ? "s" : "");
+    }
+
+    public String getName(){
+        return this.getClass().getSimpleName() + (this.getClass().equals(Gem.class) ? "s" : "");
     }
 }
