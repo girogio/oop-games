@@ -4,7 +4,6 @@ import mt.grigolo.exceptions.ArmyAwayException;
 import mt.grigolo.exceptions.ArmyFullException;
 import mt.grigolo.exceptions.InsufficientResourceException;
 import mt.grigolo.resources.Resource;
-import mt.grigolo.resources.types.Gem;
 import mt.grigolo.utils.LevelableObject;
 
 public abstract class Building extends LevelableObject {
@@ -21,16 +20,12 @@ public abstract class Building extends LevelableObject {
     }
 
     public String getBuildCostString() {
-        String s = getBuildCost() + " " + getLevelUpResource().getClass().getSimpleName();
-        if (getLevelUpResource().getClass().getSimpleName().equals(Gem.class.getSimpleName()))
-            s += "s";
-
-        return s;
+        return getBuildCost() + " " + getLevelUpResource().getName();;
     }
 
     public abstract void doTick();
 
-    public abstract void interact() throws InsufficientResourceException, ArmyFullException, ArmyAwayException;
+    public abstract void interact() throws ArmyFullException, ArmyAwayException, InsufficientResourceException;
 
     public abstract String toString();
 
