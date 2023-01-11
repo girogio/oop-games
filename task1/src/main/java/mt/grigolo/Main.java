@@ -1,6 +1,7 @@
 package mt.grigolo;
 
 import mt.grigolo.game.Game;
+import mt.grigolo.utils.Globals;
 
 import java.util.Scanner;
 
@@ -12,8 +13,6 @@ public class Main {
 
        int playerCount;
        int aiCount;
-       int w;
-       int h;
 
        do {
            System.out.print("Enter number of players (1 or more): ");
@@ -26,17 +25,8 @@ public class Main {
            aiCount = s.nextInt();
        } while (aiCount < 0);
 
-       do {
-           System.out.print("Enter map width: ");
-           w = s.nextInt();
-       } while (w < 0);
 
-       do {
-           System.out.print("Enter map height: ");
-           h = s.nextInt();
-       } while (h < 0);
-
-       Game game = new Game(playerCount, aiCount, w, h);
+        Game game = new Game(playerCount, aiCount, Globals.defaultMapWidth, Globals.defaultMapHeight);
 
         game.startGame();
 
