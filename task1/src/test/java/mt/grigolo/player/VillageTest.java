@@ -61,7 +61,7 @@ public class VillageTest {
             fail();
         }
 
-        assertEquals(1250, villageA.getHealth());
+        assertEquals(Globals.initialVillageHealth + 250, villageA.getHealth());
         assertEquals(4, villageA.getArmy().getMaxTroops());
         assertEquals(2, villageA.getLevel());
 
@@ -71,12 +71,12 @@ public class VillageTest {
     @Test
     public void damage() {
         villageA.damage(100);
-        assertEquals(900, villageA.getHealth());
+        assertEquals(Math.max(Globals.initialVillageHealth - 100, 0), villageA.getHealth());
     }
 
     @Test
     public void getHealth() {
-        assertEquals(1000, villageA.getHealth());
+        assertEquals(Globals.initialVillageHealth, villageA.getHealth());
     }
 
     @Test
