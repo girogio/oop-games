@@ -6,7 +6,7 @@
 
     <groupId>mt.grigolo.clash_of_clubs</groupId>
     <artifactId>clash_of_clubs</artifactId>
-    <version>1.0-STABLE</version>
+    <version>1.0-RELEASE</version>
 
     <properties>
         <exec.mainClass>mt.grigolo.clash_of_clubs.Main</exec.mainClass>
