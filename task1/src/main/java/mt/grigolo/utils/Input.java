@@ -6,6 +6,10 @@ public class Input {
 
     static Scanner s = new Scanner(System.in);
 
+    public static int randomInt(int min, int max){
+        return (int) (Math.random() * (max - min + 1) + min);
+    }
+
     public static int getInt(int min, int max) {
         int input = 0;
         boolean isValid = false;
