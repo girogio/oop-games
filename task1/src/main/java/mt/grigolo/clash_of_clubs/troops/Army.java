@@ -5,6 +5,7 @@ import mt.grigolo.clash_of_clubs.exceptions.ArmyEmptyException;
 import mt.grigolo.clash_of_clubs.exceptions.ArmyFullException;
 import mt.grigolo.clash_of_clubs.players.Village;
 import mt.grigolo.clash_of_clubs.utils.Globals;
+import mt.grigolo.clash_of_clubs.utils.Input;
 import mt.grigolo.clash_of_clubs.utils.Position;
 
 import java.util.ArrayList;
@@ -80,36 +81,44 @@ public class Army extends ArrayList<Troop> {
 
     public boolean attack(Village defendingVillage) {
         boolean fightSuccess = false;
-        for (Troop troop : this) {
+        for (int i = 0; i < this.size(); i++) {
             if (!defendingVillage.getArmy().isEmpty() && defendingVillage.getArmy().isInHomeVillage()) {
 
-                // Each troop attacks a random enemy troop
-                troop.fight(defendingVillage.getArmy().get((int) (Math.random() * defendingVillage.getArmy().size())));
+                // get a random opposing troop
+                int troopToAttack = Input.randomInt(0, defendingVillage.getArmy().size() - 1);
 
-                // If any troop is dead, remove it from the army
-                this.cleanCorpses();
-                defendingVillage.getArmy().cleanCorpses();
+                // Each troop attacks a random enemy troop
+                get(i).fight(defendingVillage.getArmy().get(troopToAttack));
+
+                // If friendly troop is dead, remove it from the army
+                if(get(i).isDead()) {
+                    remove(i);
+                    i--;
+                }
+
+                // if enemy troop is dead, remove it from the army
+                if(defendingVillage.getArmy().get(troopToAttack).isDead()) {
+                    defendingVillage.getArmy().remove(troopToAttack);
+                }
 
             } else {
+
                 // If the defending village has no army, or it is away, attack the village directly
-                defendingVillage.damage(troop.getAttack());
+                defendingVillage.damage(get(i).getAttack());
 
                 // take as much resource as possible from the village
-                defendingVillage.giveToTroop(troop, troop.getInventory().getMaxAmount());
+                defendingVillage.giveToTroop(get(i), get(i).getInventory().getMaxAmount());
 
+                // flag attack as successful
                 fightSuccess = true;
             }
         }
-        // start returning to base!
+        // start marching back to base!
         if (fightSuccess) {
             setDestination(defendingVillage, sourceVillage);
         }
 
         return fightSuccess;
-    }
-
-    public void cleanCorpses() {
-        removeIf(Troop::isDead);
     }
 
     @Override
