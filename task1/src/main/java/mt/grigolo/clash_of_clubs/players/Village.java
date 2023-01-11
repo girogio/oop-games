@@ -66,6 +66,9 @@ public class Village extends LevelableObject {
     public void levelUpLogic() {
         maxHealth += 250;
         health += 250;
+        gold.setMaxAmount(gold.getMaxAmount() + 250);
+        gem.setMaxAmount(gem.getMaxAmount() + 250);
+        elixir.setMaxAmount(elixir.getMaxAmount() + 250);
         army.setMaxTroops(army.getMaxTroops() + 2);
         healPerTick += 5;
     }
