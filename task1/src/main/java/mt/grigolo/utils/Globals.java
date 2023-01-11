@@ -3,21 +3,27 @@ package mt.grigolo.utils;
 public class Globals {
 
 
-    // Resource Generator
-    public static final int resGenMaxLevel = 10;
-    public static final int resGenLevelUpCost = 30;
-    public static final int resGenCostIncrease = 50;
-    public static final int resGenBuildCost = 50;
-    public static final int resGenDefaultGenPerTick = 10;
-    public static final int resGenDefaultGenIncrease = 10;
-    public static final double resGenIncFactor = 1.2;
+    // Map
+    public static final int  defaultMapWidth = 10;
+    public static final int defaultMapHeight = 10;
 
     // Village
-    public static final int initialVillageHealth = 1000;
+    public static final int initialVillageHealth = 5;
     public static final int initialMaxTroops = 2;
     public static final int initialMaxResourceAmount = 1000;
     public static final int initialVillageResourceAmount = 100;
     public static final int initialHealPerTick = 20;
+
+    // Resource
+
+        // Resource Generator
+        public static final int resGenMaxLevel = 10;
+        public static final int resGenLevelUpCost = 30;
+        public static final int resGenCostIncrease = 50;
+        public static final int resGenBuildCost = 50;
+        public static final int resGenDefaultGenPerTick = 10;
+        public static final int resGenDefaultGenIncrease = 10;
+        public static final double resGenIncFactor = 1.2;
 
     // Troops
 
