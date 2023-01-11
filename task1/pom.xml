@@ -4,12 +4,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>mt.grigolo</groupId>
+    <groupId>mt.grigolo.clash_of_clubs</groupId>
     <artifactId>clash_of_clubs</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0-STABLE</version>
 
     <properties>
-        <exec.mainClass>mt.grigolo.Main</exec.mainClass>
+        <exec.mainClass>mt.grigolo.clash_of_clubs.Main</exec.mainClass>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -38,7 +38,7 @@
                             <manifest>
                                 <addClasspath>true</addClasspath>
                                 <classpathPrefix>lib/</classpathPrefix>
-                                <mainClass>mt.grigolo.Main</mainClass>
+                                <mainClass>mt.grigolo.clash_of_clubs.Main</mainClass>
                             </manifest>
                         </archive>
                     </configuration>
