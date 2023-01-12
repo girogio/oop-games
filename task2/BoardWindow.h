@@ -7,11 +7,13 @@
 
 #include "Window.h"
 #include "Board.h"
+#include "InfoWindow.h"
 
 class BoardWindow : Window {
 
 private:
-    Board board = Board();
+    Board board = Board(2);
+    InfoWindow infoWindow;
 
 public:
     BoardWindow();
@@ -21,6 +23,7 @@ public:
     void update() override;
 
     void move(int ch);
+
 };
 
 

@@ -13,10 +13,12 @@ class Board {
 private:
     Tile tiles[16][16];
 
+    int bombCount;
 
 public:
 
-    Board();
+    explicit Board(int bombCount);
+
 
     void generateBombs(int n);
 
@@ -28,8 +30,9 @@ public:
 
     int getAdjacentBombs(int x, int y);
 
-    int getRemainingHiddenBombs();
+    int getNonBombTileCount();
 
+    int getBombCount() const;
 };
 
 

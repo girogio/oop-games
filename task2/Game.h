@@ -7,6 +7,7 @@
 
 
 #include "BoardWindow.h"
+#include "InfoWindow.h"
 
 class Game {
 

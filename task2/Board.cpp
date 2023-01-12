@@ -4,7 +4,9 @@
 
 #include "Board.h"
 
-Board::Board() {
+Board::Board(int bombCount) {
+
+    this->bombCount = bombCount;
 
     // Initialize all tiles
     for (auto &tile: tiles) {
@@ -13,7 +15,7 @@ Board::Board() {
         }
     }
 
-    generateBombs(40);
+    generateBombs(bombCount);
 
     // Set the value of each tile
     for (int y = 0; y < 16; y++) {
@@ -28,9 +30,9 @@ Board::Board() {
 void Board::generateBombs(int n) {
 
 
-    srandomdev();
+    srand(1);
 
-    for (int i = 0; i < 40; i++) {
+    for (int i = 0; i < n; i++) {
         int x = rand() % 16;
         int y = rand() % 16;
 
@@ -91,14 +93,18 @@ int Board::getAdjacentBombs(int x, int y) {
     return count;
 }
 
-int Board::getRemainingHiddenBombs() {
+int Board::getNonBombTileCount() {
     int count = 0;
     for (int y = 0; y < 16; y++) {
         for (int x = 0; x < 16; x++) {
-            if (getTile(x, y).getIsBomb() && !getTile(x, y).getIsVisible()) {
+            if (!getTile(x, y).getIsBomb() && getTile(x, y).getIsVisible()) {
                 count++;
             }
         }
     }
     return count;
+}
+
+int Board::getBombCount() const {
+    return bombCount;
 }

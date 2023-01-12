@@ -5,8 +5,9 @@
 #include "BoardWindow.h"
 
 BoardWindow::BoardWindow() : Window() {
-    init(51, 18, (COLS - 51) / 2, (LINES - 18) / 2);
-    update();
+    BoardWindow::init(51, 18, (COLS - 51) / 2, (LINES - 18) / 2);
+    BoardWindow::update();
+    infoWindow = InfoWindow();
     wmove(stdscr, start_y + 1, start_x + 3);
 }
 
@@ -70,23 +71,30 @@ void BoardWindow::move(int ch) {
             } else {
                 board.revealAll();
                 update();
-//                info_win.game_over();
+                infoWindow.setInfo("Game Over!", x, y);
+                getch();
                 endwin();
                 exit(0);
             }
 
-            if (board.getRemainingHiddenBombs() == 0) {
+            if (board.getNonBombTileCount() == (16 * 16) - board.getBombCount()) {
                 board.revealAll();
                 update();
+                infoWindow.setInfo("You win!", x, y);
+                getch();
                 endwin();
                 exit(0);
-                break;
-                case 'b':
-                    board.getTile(x, y).setIsBomb(true);
-                break;
             }
-
-//    info_win.set_info(x, y, board.get_adjacent_bombs(x, y));
-            wmove(stdscr, start_y + y + 1, start_x + x * 3 + 3);
-            update();
+            break;
+        case 'b':
+            board.getTile(x, y).setIsBomb(true);
+            break;
+        case 'c':
+            board.revealAll();
+            break;
     }
+
+    infoWindow.setInfo("", x, y);
+    wmove(stdscr, start_y + y + 1, start_x + x * 3 + 3);
+    update();
+}
