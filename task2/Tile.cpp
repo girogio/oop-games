@@ -11,7 +11,7 @@ Tile::Tile() {
     this->adjacentBombs = 0;
 }
 
-std::string Tile::getStringValue() {
+std::string Tile::getStringValue() const {
     if (!isVisible) {
         return "--";
     } else if (isBomb) {
@@ -27,7 +27,7 @@ void Tile::setValue(int value) {
     Tile::adjacentBombs = value;
 }
 
-int Tile::getValue() {
+int Tile::getValue() const {
     return adjacentBombs;
 }
 
@@ -35,8 +35,16 @@ void Tile::setIsVisible(bool visible) {
     Tile::isVisible = visible;
 }
 
-bool Tile::getIsVisible() {
+bool Tile::getIsVisible() const {
     return isVisible;
+}
+
+void Tile::setIsBomb(bool bomb) {
+    Tile::isBomb = bomb;
+}
+
+bool Tile::getIsBomb() const {
+    return isBomb;
 }
 
 

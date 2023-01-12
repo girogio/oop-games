@@ -16,16 +16,16 @@ private:
 public:
     Tile();
 
-    std::string getStringValue();
+    std::string getStringValue() const;
 
     void setValue(int value);
-    int getValue();
+    int getValue() const;
 
     void setIsVisible(bool visible);
-    bool getIsVisible();
+    bool getIsVisible() const;
 
     void setIsBomb(bool isBomb);
-    bool getIsBomb();
+    bool getIsBomb() const;
 
     void setIsFlagged(bool isFlagged);
     bool getIsFlagged();
