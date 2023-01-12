@@ -90,3 +90,15 @@ int Board::getAdjacentBombs(int x, int y) {
                     count++;
     return count;
 }
+
+int Board::getRemainingHiddenBombs() {
+    int count = 0;
+    for (int y = 0; y < 16; y++) {
+        for (int x = 0; x < 16; x++) {
+            if (getTile(x, y).getIsBomb() && !getTile(x, y).getIsVisible()) {
+                count++;
+            }
+        }
+    }
+    return count;
+}

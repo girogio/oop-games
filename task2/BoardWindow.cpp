@@ -71,15 +71,22 @@ void BoardWindow::move(int ch) {
                 board.revealAll();
                 update();
 //                info_win.game_over();
+                endwin();
                 exit(0);
             }
-            break;
-        case 'b':
-            board.getTile(x, y).setIsBomb(true);
-            break;
-    }
+
+            if (board.getRemainingHiddenBombs() == 0) {
+                board.revealAll();
+                update();
+                endwin();
+                exit(0);
+                break;
+                case 'b':
+                    board.getTile(x, y).setIsBomb(true);
+                break;
+            }
 
 //    info_win.set_info(x, y, board.get_adjacent_bombs(x, y));
-    wmove(stdscr, start_y + y + 1, start_x + x * 3 + 3);
-    update();
-}
+            wmove(stdscr, start_y + y + 1, start_x + x * 3 + 3);
+            update();
+    }

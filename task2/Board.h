@@ -28,6 +28,8 @@ public:
 
     int getAdjacentBombs(int x, int y);
 
+    int getRemainingHiddenBombs();
+
 };
 
 
