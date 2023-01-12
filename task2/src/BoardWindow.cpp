@@ -5,7 +5,7 @@
 #include "BoardWindow.h"
 
 BoardWindow::BoardWindow() : Window() {
-    BoardWindow::init(51, 18, (COLS - 51) / 2, (LINES - 18) / 2);
+    Window::init(51, 18, (COLS - 51) / 2, (LINES - 18) / 2);
     BoardWindow::update();
     infoWindow = InfoWindow();
     wmove(stdscr, start_y + 1, start_x + 3);

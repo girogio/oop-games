@@ -30,7 +30,7 @@ Board::Board(int bombCount) {
 void Board::generateBombs(int n) {
 
 
-    srand(1);
+    srand(time(NULL));
 
     for (int i = 0; i < n; i++) {
         int x = rand() % 16;

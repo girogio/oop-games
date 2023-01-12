@@ -12,7 +12,7 @@
 class BoardWindow : Window {
 
 private:
-    Board board = Board(2);
+    Board board = Board(40);
     InfoWindow infoWindow;
 
 public:
