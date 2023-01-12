@@ -4,3 +4,4 @@ Makefile
 CMakeFiles
 cmake-build-debug
 minesweeper
+.idea
