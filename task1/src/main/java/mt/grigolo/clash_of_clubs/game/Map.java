@@ -3,6 +3,7 @@ package mt.grigolo.clash_of_clubs.game;
 import mt.grigolo.clash_of_clubs.players.Player;
 import mt.grigolo.clash_of_clubs.players.types.AI;
 import mt.grigolo.clash_of_clubs.players.types.Human;
+import mt.grigolo.clash_of_clubs.utils.Globals;
 
 import java.util.ArrayList;
 
@@ -34,7 +35,7 @@ public class Map {
                 x = (int) (Math.random() * width);
                 y = (int) (Math.random() * height);
             } while (isOccupied(x, y));
-            players.add(new AI(x, y, playerCount + i + 1));
+            players.add(new AI(x, y, playerCount + i + 1, Globals.defaultAIactionsPerTurn));
         }
 
         for (Player player : players) {

@@ -10,13 +10,16 @@ import java.util.List;
 
 public class AI extends Player {
 
-    public AI(int x, int y, int id) {
+    private final int actionsPerTurn;
+
+    public AI(int x, int y, int id, int actionsPerTurn) {
         super(x, y, id);
+        this.actionsPerTurn = actionsPerTurn;
     }
 
     public void playerInput() {
 
-        int numberOfActions = Input.randomInt(1, 3);
+        int numberOfActions = Input.randomInt(1, actionsPerTurn);
 
         for (int i = 0; i < numberOfActions; i++) {
 
@@ -32,7 +35,7 @@ public class AI extends Player {
                 try {
                     build(building, type);
                 } catch (InsufficientResourceException ignored) {
-
+                    i--;
                 }
 
             } else if (choice == 2 && getVillage().getBuildings().size() > 0) {
@@ -46,7 +49,7 @@ public class AI extends Player {
                         getVillage().getBuildings().get(buildingToLevelUp).levelUp();
                     }
                 } catch (InsufficientResourceException | MaxLevelException ignored) {
-
+                    i--;
                 }
 
             } else if (choice == 3 && getVillage().getBuildings().stream().anyMatch(building -> building instanceof TroopGenerator)) {
@@ -59,7 +62,7 @@ public class AI extends Player {
                 try {
                     getVillage().getBuildings().get(troopToTrain).interact();
                 } catch (InsufficientResourceException | ArmyFullException | ArmyAwayException ignored) {
-
+                    i--;
                 }
 
             } else if (choice == 4 && Map.players.size() > 1) {
@@ -71,7 +74,7 @@ public class AI extends Player {
                 try {
                     getVillage().getArmy().initiateAttack(Map.players.get(villages.get(villageToAttack)).getVillage());
                 } catch (ArmyEmptyException | ArmyBusyException ignored) {
-
+                    i--;
                 }
 
             }
