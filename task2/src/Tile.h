@@ -11,7 +11,7 @@ class Tile {
 
 private:
     int adjacentBombs;
-    bool isVisible, isBomb, isFlagged;
+    bool isVisible, isBomb;
 
 public:
     Tile();
@@ -26,10 +26,6 @@ public:
 
     void setIsBomb(bool isBomb);
     bool getIsBomb() const;
-
-    void setIsFlagged(bool isFlagged);
-    bool getIsFlagged();
-
 };
 
 
