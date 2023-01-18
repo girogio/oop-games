@@ -6,7 +6,6 @@
 
 Tile::Tile() {
     this->isBomb = false;
-    this->isFlagged = false;
     this->isVisible = false;
     this->adjacentBombs = 0;
 }
