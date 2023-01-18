@@ -6,14 +6,13 @@
 #define MINESWEEPER_INFOWINDOW_H
 
 #include "Window.h"
-#include "Board.h"
 #include "string"
 
 class InfoWindow : Window {
 
 private:
     std::string title;
-    int xc, yc;
+    int current_x, current_y;
 
 public:
     InfoWindow();
