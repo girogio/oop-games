@@ -19,9 +19,6 @@ public:
 
     explicit Board(int bombCount);
 
-
-    void generateBombs(int n);
-
     Tile &getTile(int x, int y);
 
     void revealTile(int x, int y);

@@ -15,24 +15,9 @@ Board::Board(int bombCount) {
         }
     }
 
-    generateBombs(bombCount);
-
-    // Set the value of each tile
-    for (int y = 0; y < 16; y++) {
-        for (int x = 0; x < 16; x++) {
-            getTile(x, y).setValue(getAdjacentBombs(x, y));
-        }
-    }
-
-}
-
-
-void Board::generateBombs(int n) {
-
-
     srand(time(NULL));
 
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < bombCount; i++) {
         int x = rand() % 16;
         int y = rand() % 16;
 
@@ -43,7 +28,15 @@ void Board::generateBombs(int n) {
         }
     }
 
+    // Set the value of each tile
+    for (int y = 0; y < 16; y++) {
+        for (int x = 0; x < 16; x++) {
+            getTile(x, y).setValue(getAdjacentBombs(x, y));
+        }
+    }
+
 }
+
 
 Tile &Board::getTile(int x, int y) {
     return tiles[y][x];
