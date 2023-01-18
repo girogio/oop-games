@@ -84,10 +84,6 @@ public class Map {
         return s.toString();
     }
 
-    public ArrayList<Player> getPlayers() {
-        return players;
-    }
-
     protected boolean isOccupied(int x, int y) {
         for (Player player : players) {
             if (player.getVillage().pos.getX() == x && player.getVillage().pos.getY() == y) {

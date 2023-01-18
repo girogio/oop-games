@@ -8,7 +8,7 @@ public class Game {
     private final Map map;
 
     public Game(int playerCount, int aiCount, int w, int h) {
-        this.map = new mt.grigolo.clash_of_clubs.game.Map(w, h, playerCount, aiCount);
+        this.map = new Map(w, h, playerCount, aiCount);
     }
 
     public void startGame() {
@@ -20,12 +20,12 @@ public class Game {
 
 
         // Clean up dead players
-        map.getPlayers().removeIf(player -> !player.isAlive());
+        Map.players.removeIf(player -> !player.isAlive());
 
-        map.getPlayers().stream().filter(Player::isAlive).forEach(Player::doTurn);
+        Map.players.stream().filter(Player::isAlive).forEach(Player::doTurn);
 
         // Win condition
-        if (map.getPlayers().size() == 1) {
+        if (Map.players.size() == 1) {
             Input.clearScreen();
             System.out.println("""
                     ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
@@ -34,13 +34,13 @@ public class Game {
                     ░░░░▀▀▀▀░▀▀▀▀░░▀▀▀░▀▀▀░░▀░░░░
                     ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
                     """);
-            System.out.println("Player " + map.getPlayers().get(0).getId() + " won!\n");
+            System.out.println("Player " + Map.players.get(0).getId() + " won!\n");
             Input.closeScanner();
             return;
         }
 
         // March phase
-        map.getPlayers().forEach(player -> player.getVillage().getArmy().march());
+        Map.players.forEach(player -> player.getVillage().getArmy().march());
 
         map.round++;
 
