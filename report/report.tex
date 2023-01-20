@@ -21,7 +21,15 @@
 
 \maketitle
 \begin{abstract}
-	This report is a summary of the Object Oriented Programming course.
+    \begin{center}
+        This report is a documentation of the development of a Java implementation of a Village War Game and a C++ implementation of Minesweeper, 
+        which was developed as part of the Object Oriented Programming course at the University of Malta.
+    \end{center}
+
+    \begin{center}
+        \textbf{Repository: }\href{https://github.com/girogio/oop-games}{https://github.com/girogio/oop-games}\\
+        \textbf{Last commit: } 
+    \end{center}
 \end{abstract}
 
 \tableofcontents
@@ -321,16 +329,49 @@ properties of objects. Since I am not a game designer, I did not have the time t
 values for these properties, and therefore I have decided to make them configurable, so that they can be
 tweaked by the user.
 
+
+\newpage
+
 \subsection{Testing}
 
 Due to the sheer number of interactions and possible states that the game can be in, it is very difficult
 to test the game manually. Therefore, we have decided to implement a series of automated unit tests, that
-test the functionality various parts of the game in an isolated manner, making sure that they work as expected.
+test the functionality various parts of the game in an isolated manner, without having to go through all the game menus.
 
 These can be found in the \code{tests} directory under the main package, and are written using the
-\code{JUnit} framework. 
+\code{JUnit} framework. Most notably, the \code{Village}, \code{Army}, and
+\code{Resource} interactions were the most crucial to the successful execution
+of the game.
+
+The codebase has also been analysed using \code{CodeMR}
+\footnote{http://codemr.sourceforge.net/}, which is a static analysis tool for
+Java code. With it, we are able to deduce some of the metrics of the quality of the software,
+such as the coupling of classes (lower is better), cohesion (higher is better), and complexity.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/code_mr.png}
+    \caption{CodeMR results}
+    \label{fig:codemr}
+\end{figure}
 
 
+\subsection{Critical Evaluation and Limitations}
+
+There are a lot of avenues that could have been improved, for the sake of the
+expansion of the game. For example, to create a new \code{Troop}, a developer must create
+a new class for every new \code{Troop} type, and also add a new \code{TroopGenerator}. This could have been 
+fixed by using a \code{Factory} design pattern, and creating a \code{TroopFactory} that would
+create \code{Troop}s, say, based on a string identifier.
+
+Another limitation of the game is that it is not possible to save the game state, and
+resume it at a later time. This could have been implemented by serializing the game state
+to a file, and then deserializing it when the game is loaded.
+
+Furthermore, there is a possibility that \code{Village}s can spawn really close to each other,
+making the game uninteresting, as an \code{Army} would arrive in one turn.
+
+The specifications were also followed quite closely, except for the combat resolution algorithm.
 
 
 \newpage
