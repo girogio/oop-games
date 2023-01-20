@@ -7,7 +7,7 @@ import mt.grigolo.clash_of_clubs.troops.types.Archer;
 public class ArcherGenerator extends TroopGenerator {
 
     public ArcherGenerator(Village v) {
-        super(new Archer(), v.getArmy(), v.getGemStorage());
+        super(new Archer(), v.getArmy(), v.getGoldStorage());
     }
 
     @Override
