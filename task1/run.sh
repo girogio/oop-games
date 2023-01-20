@@ -1,4 +1,4 @@
 #!/bin/bash
 
-mvn package
-java -jar target/clash_of_clubs-1.0-RELEASE.jar
+mvn test
+mvn exec:java

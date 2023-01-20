@@ -42,7 +42,7 @@ public class TroopGeneratorTest {
 
     @Test(expected = InsufficientResourceException.class)
     public void interactInsufficientResource() throws InsufficientResourceException, ArmyFullException, ArmyAwayException {
-        village.getGemStorage().setAmount(0);
+        village.getGoldStorage().setAmount(0);
         troopGenerator.interact();
     }
 }
