@@ -1,3 +1,3 @@
-cd src
-cmake . -B../build
-cmake --build ../build
+#!/bin/bash
+
+g++ -Wall -std=c++20 -lncurses -o bin/minesweeper src/*.cpp 
