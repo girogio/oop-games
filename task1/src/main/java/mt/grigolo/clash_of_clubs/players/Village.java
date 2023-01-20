@@ -17,15 +17,15 @@ public class Village extends LevelableObject {
 
     public final Position pos;
 
-    private int health, maxHealth;
-
-    private int healPerTick;
-
     private final Gold gold;
 
     private final Gem gem;
 
     private final Elixir elixir;
+
+    private int health, maxHealth;
+
+    private int healPerTick;
 
     public Gold getGoldStorage() {
         return gold;
